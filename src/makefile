@@ -21,7 +21,6 @@ CLASSES = \
 				Seat.java \
 				Show.java \
 				ShowDatabase.java \
-				ShowInformation.java \
 				ShowUI.java \
 				Staff.java \
 				Theater.java \
@@ -31,6 +30,9 @@ CLASSES = \
 				VenueDatabase.java \
 
 default:	compile
+
+setup:
+	mkdir ../bin
 
 compile:
 	$(JC) $(JFLAGS) $(CLASSES)
