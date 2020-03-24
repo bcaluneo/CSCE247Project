@@ -19,7 +19,7 @@ public class ShowDatabase {
 		return null;
 	}
 
-	public void editShowInformation(Show show, ShowInformation showInformation) {
+	public void editShowInformation(Show show, String key, Object value) {
 	}
 
 	public void addShow(Show show) {

@@ -2,10 +2,12 @@ import java.util.HashMap;
 
 public abstract class Show {
 
+	private static final int MAX_ATTRIBUTES = 7;
+
 	private HashMap<String, Object> showInformation;
 
 	public Show() {
-		this.showInformation = new HashMap<String, Object>(7);
+		this.showInformation = new HashMap<String, Object>(MAX_ATTRIBUTES);
 
 		showInformation.put("name", null); /* String */
 		showInformation.put("description", null); /* String */
