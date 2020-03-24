@@ -29,6 +29,7 @@ CLASSES = \
 				User.java \
 				UserManager.java \
 				Venue.java \
+				VenueDatabase.java \
 
 default:	compile
 

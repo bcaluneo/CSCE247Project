@@ -10,11 +10,11 @@ public class ShowUI {
 		scanner = new Scanner(System.in);
 	}
 
-	public void start() {
+	public void run() {
 		System.out.println("Show System Started");
 
-		boolean interrupted = false;
-		while (!interrupted) {
-		}
+		// boolean interrupted = false;
+		// while (!interrupted) {
+		// }
 	}
 }
