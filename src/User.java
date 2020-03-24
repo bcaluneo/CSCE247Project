@@ -1,11 +1,13 @@
+import java.util.HashMap;
+
 public class User {
 
 	private HashMap<String, Object> profileInformation;
 	private BookedShow[] bookedShows;
 	private Age ageRating;
 
-	public User(ProfileInformation profileInformation) {
-		this.profileInformation = new Hashmap<String, String>(13);
+	public User() {
+		this.profileInformation = new HashMap<String, Object>(13);
 		this.bookedShows = new BookedShow[100];
 
 		profileInformation.put("username", null);
@@ -23,14 +25,14 @@ public class User {
 		profileInformation.put("rewardPoints", null);
 	}
 
-	public String getProfileInformation(String key) {
+	public Object getProfileInformation(String key) {
 		return profileInformation.get(key);
 	}
 
 	public void setProfileInformation(String key, String value) {
 		if (profileInformation.get(key) == null) {
-			System.out.println("error: setProfileInformation(String, String): no
-													information found for that key.");
+			System.out.println("error: setProfileInformation(String, String): no" +
+													"information found for that key.");
 			return;
 		}
 

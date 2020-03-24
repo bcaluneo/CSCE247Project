@@ -17,7 +17,6 @@ CLASSES = \
 				Guest.java \
 				Movie.java \
 				Payment.java \
-				ProfileInformation.java \
 				Review.java \
 				Seat.java \
 				Show.java \
