@@ -10,28 +10,28 @@ public class User {
 		this.profileInformation = new HashMap<String, Object>(13);
 		this.bookedShows = new BookedShow[100];
 
-		profileInformation.put("username", null);
-		profileInformation.put("name", null);
-		profileInformation.put("email", null);
-		profileInformation.put("password", null);
-		profileInformation.put("dob", null);
-		profileInformation.put("zipCode", null);
-		profileInformation.put("discount", null);
-		profileInformation.put("isAdult", null);
-		profileInformation.put("isStaff", null);
-		profileInformation.put("isAdmin", null);
-		profileInformation.put("isVIP", null);
-		profileInformation.put("isHandicapped", null);
-		profileInformation.put("rewardPoints", null);
+		profileInformation.put("username", null); /* String */
+		profileInformation.put("name", null); /* String */
+		profileInformation.put("email", null); /* String */
+		profileInformation.put("password", null); /* String */
+		profileInformation.put("dob", null); /* String */
+		profileInformation.put("zipCode", null); /* int */
+		profileInformation.put("discount", null); /* boolean */
+		profileInformation.put("isAdult", null); /* boolean */
+		profileInformation.put("isStaff", null); /* boolean */
+		profileInformation.put("isAdmin", null); /* boolean */
+		profileInformation.put("isVIP", null); /* boolean */
+		profileInformation.put("isHandicapped", null); /* boolean */
+		profileInformation.put("rewardPoints", null); /* double */
 	}
 
 	public Object getProfileInformation(String key) {
 		return profileInformation.get(key);
 	}
 
-	public void setProfileInformation(String key, String value) {
+	public void setProfileInformation(String key, Object value) {
 		if (profileInformation.get(key) == null) {
-			System.out.println("error: setProfileInformation(String, String): no" +
+			System.out.println("error setProfileInformation(String, Object): no" +
 													"information found for that key.");
 			return;
 		}

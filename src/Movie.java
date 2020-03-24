@@ -2,8 +2,7 @@ public class Movie extends Show {
 
 	private Review[] reviews;
 
-	public Movie(ShowInformation showInformation) {
-		setShowInformation(showInformation);
+	public Movie() {
 	}
 
 	public int getAverageRating() {

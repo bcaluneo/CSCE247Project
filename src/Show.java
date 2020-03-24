@@ -1,12 +1,32 @@
+import java.util.HashMap;
+
 public abstract class Show {
 
-	private ShowInformation showInformation;
+	private HashMap<String, Object> showInformation;
 
-	public ShowInformation getShowInformation() {
-		return showInformation;
+	public Show() {
+		this.showInformation = new HashMap<String, Object>(7);
+
+		showInformation.put("name", null); /* String */
+		showInformation.put("description", null); /* String */
+		showInformation.put("price", null); /* double */
+		showInformation.put("ageRating", null); /* Enum (Age) */
+		showInformation.put("genre", null); /* Enum (Genre) */
+		showInformation.put("inTheaters", null); /* boolean */
+		showInformation.put("times", null); /* String[] */
 	}
 
-	public void setShowInformation(ShowInformation showInformation) {
-		this.showInformation = showInformation;
+	public Object getShowInformation(String key) {
+		return showInformation.get(key);
+	}
+
+	public void setShowInformation(String key, Object value) {
+		if (showInformation.get(key) == null) {
+			System.out.println("error setShowInformation(String, Object): no" +
+													"information found for that key.");
+			return;
+		}
+
+		showInformation.replace(key, value);
 	}
 }
