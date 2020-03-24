@@ -1,5 +1,3 @@
-package teamblue;
-
 public class ShowDatabase {
 
 	private static ShowDatabase showDatabase;
