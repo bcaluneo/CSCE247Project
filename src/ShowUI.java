@@ -7,7 +7,7 @@ public class ShowUI {
 	private Scanner scanner;
 
 	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
-															"Quit"};
+															"Rate", "Quit"};
 
 	public ShowUI() {
 		scanner = new Scanner(System.in);
@@ -119,6 +119,5 @@ public class ShowUI {
 		}
 
 		System.out.println("Seats successfully booked.");
-		theater.printSeats();
 	}
 }
