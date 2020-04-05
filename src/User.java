@@ -7,12 +7,12 @@ public class User {
 
 	private HashMap<String, Object> profileInformation;
 	private BookedShow[] bookedShows;
-	private Age ageRating;
+	
 
 	public User() {
 		this.profileInformation = new HashMap<String, Object>(MAX_ATTRIBUTES);
 		this.bookedShows = new BookedShow[MAX_SHOWS];
-
+		
 		profileInformation.put("username", null); /* String */
 		profileInformation.put("name", null); /* String */
 		profileInformation.put("email", null); /* String */
@@ -26,6 +26,7 @@ public class User {
 		profileInformation.put("isVIP", null); /* boolean */
 		profileInformation.put("isHandicapped", null); /* boolean */
 		profileInformation.put("rewardPoints", null); /* double */
+		profileInformation.put("isAgeRestricted",null); /* boolean */
 	}
 
 	public Object getProfileInformation(String key) {
