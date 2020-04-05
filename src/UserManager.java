@@ -91,11 +91,12 @@ public class UserManager {
 		user.setProfileInformation("password", string);
 		users.add(user);
 		currentUser = user;
+		System.out.println("Loggin in as "+user.getProfileInformation("username"));
 	}
 	
 	public boolean emailExists(String email) {
 		for(User user : users) {
-			if(user.getProfileInformation("email")==email) {
+			if(user.getProfileInformation("email").equals(email)) {
 				return true;
 			}
 		}
@@ -104,7 +105,7 @@ public class UserManager {
 	
 	public boolean usernameExists(String username) {
 		for(User user : users) {
-			if(user.getProfileInformation("username")==username) {
+			if(user.getProfileInformation("username").equals(username)) {
 				return true;
 			}
 		}
@@ -115,7 +116,7 @@ public class UserManager {
 		if(emailExists(email)){
 			int account = 0;
 			for(User user : users) {
-				if(user.getProfileInformation("email")==email) {
+				if(user.getProfileInformation("email").equals(email)) {
 					users.remove(account);
 				}
 				account++;
@@ -141,8 +142,9 @@ public class UserManager {
 		while(Continue){
 			System.out.println("Enter your password");
 			string = scanner.next();
-			if(string==user.getProfileInformation("password")) {
+			if(user.getProfileInformation("password").equals(string)) {
 				this.currentUser=user;
+				System.out.println("Loggin in as "+user.getProfileInformation("username"));
 				Continue = false;
 			} else {
 				System.out.println("Password is invalid");
@@ -156,7 +158,7 @@ public class UserManager {
 
 	public User getUserByEmail(String email) {
 		for(User user : users) {
-			if(user.getProfileInformation("email")==email) {
+			if(user.getProfileInformation("email").equals(email)) {
 				return user;
 			}
 		}

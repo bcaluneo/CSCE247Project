@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import java.util.List;
+import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.ArrayList;
 
 public class ShowUI {
@@ -33,15 +34,19 @@ public class ShowUI {
 			int selection = scanner.nextInt();
 			switch (selection) {
 				case 0: /* Login */
+					UserManager.getInstance().loginUser();
 					break;
 				case 1: /* Create Account */
+					UserManager.getInstance().createUser();
 					break;
 				case 2: /* Search */
 					break;
 				case 3: /* Book */
 					bookTicket();
 					break;
-				case 4: /* Quit */
+				case 4: /* Rate */
+					break;
+				case 5: /* Quit */
 					System.out.println("Quitting system...");
 					quit = true;
 					break;
