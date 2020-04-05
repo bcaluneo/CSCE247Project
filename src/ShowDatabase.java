@@ -22,6 +22,10 @@ public class ShowDatabase {
 		return showDatabase;
 	}
 
+	public Show getShowByIndex(int index) {
+		return shows[index];
+	}
+
 	public Show getShowByName(String showName) {
 		return null;
 	}
