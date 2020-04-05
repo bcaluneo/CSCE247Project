@@ -59,15 +59,13 @@ public class ShowUI {
 		System.out.println(venue.toString());
 		selection = scanner.nextInt();
 		Theater theater = venue.getTheater(selection);
-		theater.printSeats();
-
 		List<Seat> seats = new ArrayList<Seat>();
 		char row;
 		int column;
-
 		System.out.println("How many seats would you like to book?");
 		int seatCount = scanner.nextInt();
-
+		theater.printSeats();
+		System.out.println("Select your seats: ");
 		while (seatCount != 0) {
 			row = scanner.next().charAt(0);
 			column = scanner.nextInt();
