@@ -17,6 +17,10 @@ public class VenueDatabase {
 		return venueDatabase;
 	}
 
+  public Venue getVenueByIndex(int index) {
+    return venues[i];
+  }
+
   public Venue getVenueByname(String name) {
     return null;
   }
