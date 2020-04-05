@@ -18,7 +18,7 @@ public class VenueDatabase {
 	}
 
   public Venue getVenueByIndex(int index) {
-    return venues[i];
+    return venues[index];
   }
 
   public Venue getVenueByname(String name) {
@@ -37,7 +37,7 @@ public class VenueDatabase {
     printout += "Venues: \n";
     for (int i = 0; i < venues.length; i++) {
     	if(venues[i]!=null)
-    		printout += i + ": " + venues[i].toString();
+    		printout += i + ": " + venues[i].getName() +"\n";
 		}
 
     return printout;

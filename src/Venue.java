@@ -10,6 +10,10 @@ public class Venue {
 		this.name = name;
 		this.location = location;
 		theaters = new Theater[MAX_THEATERS];
+
+		for (int i = 0; i < 5; i++) {
+			theaters[i] = new Theater((char)5, 5);
+		}
 	}
 
 	public void bookSeat() {
@@ -27,6 +31,14 @@ public class Venue {
 	public String toString() {
 		String printout = "";
 		printout += name+"\n";
+		for (int i = 0; i < theaters.length; i++) {
+			if(theaters[i]!=null)
+				printout += "Theater: " + i + "\n";
+		}
 		return printout;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 }
