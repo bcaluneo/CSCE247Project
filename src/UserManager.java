@@ -51,10 +51,46 @@ public class UserManager {
 				Continue = false;
 			}
 		}
+		
+		int month=0,day=0,year=0;
+		Continue = true;
+		while(Continue) {
+			System.out.println("Enter your date of birth month");
+			month = scanner.nextInt();
+			if(month>12 || month<1) {
+				System.out.println("Number entered is invalid");
+			} else {
+				Continue=false;
+			}
+		}
+		Continue = true;
+		while(Continue) {
+			System.out.println("Enter your date of birth day");
+			day = scanner.nextInt();
+			if(day<1||day>31) {
+				System.out.println("Number entered is invalid");
+			} else {
+				Continue=false;
+			}
+		}
+		Continue = true;
+		while(Continue) {
+			System.out.println("Enter your date of birth year");
+			year = scanner.nextInt();
+			if(year>2020 || year<1900) {
+				System.out.println("Number entered is invalid");
+			} else {
+				Continue=false;
+			}
+		}
+		int[] dob = {month,day,year};
+		user.setProfileInformation("dob", dob);
+		
 		System.out.println("Create a password");
 		string = scanner.next();
 		user.setProfileInformation("password", string);
 		users.add(user);
+		currentUser = user;
 	}
 	
 	public boolean emailExists(String email) {
