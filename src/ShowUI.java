@@ -72,6 +72,20 @@ public class ShowUI {
 	public void bookingTix() {
 		System.out.println(VenueDatabase.getInstance().toString());
 		int selection = getInput();
+		Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
+		System.out.println(ShowDatabase.getInstance().toString());
+		selection = getInput();
+		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
+		System.out.println(venue.toString());
+		selection = getInput();
+		Theater theater = venue.getTheater(selection);
+		theater.printSeats();
+		char row = scanner.next().charAt(0);
+		int column = getInput();
+		Payment payment = new Payment(null, venue, theater,show,theater.getSeats()[row-'A'][column]); 
+		payment.initiatePayment();
+		venue.bookSeat(theater, row, column);
+		theater.printSeats();
 		
 	}
 

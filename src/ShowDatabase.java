@@ -44,7 +44,8 @@ public class ShowDatabase {
 		printout += "===========================\n";
 		printout += "Showings: \n";
 		for (int i = 0; i < shows.length; i++) {
-			printout += i + ": " + shows[i].getShowInformation("name");
+			if(shows[i]!=null)
+				printout += i + ": " + shows[i].getShowInformation("name")+ "\n";
 		}
 
 		return printout;

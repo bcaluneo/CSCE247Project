@@ -12,11 +12,12 @@ public class Venue {
 		theaters = new Theater[MAX_THEATERS];
 
 		for (int i = 0; i < 5; i++) {
-			theaters[i] = new Theater((char)5, 5);
+			theaters[i] = new Theater('E', 5);
 		}
 	}
 
-	public void bookSeat() {
+	public void bookSeat(Theater theater, char row, int column) {
+		theater.getSeats()[row-'A'][column].setBooked(true);
 	}
 
 	public void refundSeat() {
@@ -40,5 +41,8 @@ public class Venue {
 
 	public String getName() {
 		return this.name;
+	}
+	public Theater getTheater(int i ) {
+		return theaters[i];
 	}
 }
