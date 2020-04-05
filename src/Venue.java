@@ -12,7 +12,7 @@ public class Venue {
 		theaters = new Theater[MAX_THEATERS];
 
 		for (int i = 0; i < 5; i++) {
-			theaters[i] = new Theater('E', 5);
+			theaters[i] = new Theater(i, 'E', 5);
 		}
 	}
 

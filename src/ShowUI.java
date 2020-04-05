@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.List;
+import java.util.ArrayList;
 
 public class ShowUI {
 
@@ -22,44 +24,22 @@ public class ShowUI {
 		System.out.print("Make a selection: ");
 	}
 
-	public int getInput() {
-		
-		int selection = scanner.nextInt();
-		/*while (selection < 0 || selection >= options.length) {
-			printOptions();
-			selection = scanner.nextInt();
-			}
-			*/
-		
-
-		return selection;
-	}
-
 	public void run() {
 		System.out.println("Show System Started");
 
 		boolean quit = false;
 		while (!quit) {
 			printOptions();
-			int selection = getInput();
+			int selection = scanner.nextInt();
 			switch (selection) {
 				case 0: /* Login */
-					selection = getInput();
 					break;
 				case 1: /* Create Account */
-					selection = getInput();
 					break;
 				case 2: /* Search */
-					selection = getInput();
 					break;
 				case 3: /* Book */
-					bookingTix();
-					/*   Phase 1: Print out the venues.
-						 Phase 2: Select a venue.
-						 Phase 3: Select a showing.
-						 Phase 4: Select a theater and seat.
-						 Phase 5: Initiate the payment.
-						 Phase 6: Printout the tickets. */
+					bookTicket();
 					break;
 				case 4: /* Quit */
 					System.out.println("Quitting system...");
@@ -68,25 +48,79 @@ public class ShowUI {
 			}
 		}
 	}
-	
-	public void bookingTix() {
+
+	public void bookTicket() {
 		System.out.println(VenueDatabase.getInstance().toString());
-		int selection = getInput();
+		int selection = scanner.nextInt();
 		Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
 		System.out.println(ShowDatabase.getInstance().toString());
-		selection = getInput();
+		selection = scanner.nextInt();
 		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
 		System.out.println(venue.toString());
-		selection = getInput();
+		selection = scanner.nextInt();
 		Theater theater = venue.getTheater(selection);
 		theater.printSeats();
-		char row = scanner.next().charAt(0);
-		int column = getInput();
-		Payment payment = new Payment(null, venue, theater,show,theater.getSeats()[row-'A'][column]); 
-		payment.initiatePayment();
-		venue.bookSeat(theater, row, column);
-		theater.printSeats();
-		
+
+		List<Seat> seats = new ArrayList<Seat>();
+		char row;
+		int column;
+
+		System.out.println("How many seats would you like to book?");
+		int seatCount = scanner.nextInt();
+
+		while (seatCount != 0) {
+			row = scanner.next().charAt(0);
+			column = scanner.nextInt();
+			seats.add(theater.getSeats()[row-'A'][column]); /* TODO: Change this. */
+			seatCount--;
+		}
+
+		scanner.nextLine();
+
+		processOrder(venue, theater, show, seats);
 	}
 
+	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
+		System.out.print("Enter Card Holder's Name: ");
+		String cardName = scanner.nextLine();
+		System.out.print("Enter Card Number (No Dash): ");
+		String cardNumber = scanner.nextLine();
+		System.out.print("Enter Card Expiration Date (MM/YY): ");
+		String cardDate = scanner.nextLine();
+		System.out.print("Enter Card Security Code: ");
+		String cardCode = scanner.nextLine();
+		if (!UserManager.getInstance().getCurrentUser().isDefaultUser()) {
+				System.out.println("Would you like to save this payment information? (y/n)");
+				char choice = scanner.next().charAt(0);
+				if (choice == 'y') {
+					System.out.println("Information saved.");
+					UserManager.getInstance().getCurrentUser().setPaymentInformation("card-name", cardName);
+					UserManager.getInstance().getCurrentUser().setPaymentInformation("card-number", cardNumber);
+					UserManager.getInstance().getCurrentUser().setPaymentInformation("card-date", cardDate);
+					UserManager.getInstance().getCurrentUser().setPaymentInformation("card-code", cardCode);
+				}
+		}
+
+		System.out.println("===========================");
+		System.out.println("Shopping Cart:");
+		System.out.println("Venue: " + venue.getName());
+		System.out.println("Theater: " + theater.getTheaterNumber());
+		System.out.println("Seats: ");
+		for (Seat s : seats) {
+			System.out.println("** " + s.getSeatRow() + "" + s.getSeatColumn());
+		}
+
+		System.out.println("Would you like to checkout? (y/n)");
+		char choice = scanner.next().charAt(0);
+		if (choice == 'y') {
+			for (Seat s : seats) {
+				venue.bookSeat(theater, s.getSeatRow(), s.getSeatColumn());
+			}
+
+			UserManager.getInstance().getCurrentUser().bookShow(venue, theater, show, seats);
+		}
+
+		System.out.println("Seats successfully booked.");
+		theater.printSeats();
+	}
 }
