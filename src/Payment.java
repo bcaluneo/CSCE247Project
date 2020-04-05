@@ -1,17 +1,17 @@
 
 public class Payment {
 	private User user;
-	private Theater venue;
+	private Venue venue;
 	private Room room;
-	private Movie movie;
-	char seatRow;
-	int seatColumn;
+	private Show show;
+	private Seat seat
 	
-	public Payement(User user, Theater Venue, Movie movie, Room room) {
+	public Payment(User user, Venue venue, Show show, Room room, Seat seat) {
 		this.user = user;
 		this.venue = venue;
-		this.movie = movie;
+		this.show = show;
 		this.room = room;
+		this.seat = seat;
 	}
 	
 	public void initiatePayment() {
