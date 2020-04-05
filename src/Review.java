@@ -9,4 +9,9 @@ public class Review {
 		this.rating = rating;
 	}
 	
+	public String toString() {
+		return "Author: "+this.author.getProfileInformation("username")
+			+"/nDescription: "+this.description
+			+"/nRating: "+this.rating+" Stars";
+	}
 }

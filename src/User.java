@@ -3,7 +3,7 @@ import java.util.HashMap;
 public class User {
 
 	private static final int MAX_SHOWS = 100;
-	private static final int MAX_ATTRIBUTES = 13;
+	private static final int MAX_ATTRIBUTES = 14;
 
 	private HashMap<String, Object> profileInformation;
 	private BookedShow[] bookedShows;
