@@ -5,6 +5,13 @@ public class ShowDatabase {
 
 	private ShowDatabase() {
 		shows = new Show[100];
+
+		/* TODO: Test code. */
+		for (int i = 0; i < 5; i++) {
+			Show show = new Show();
+			show.setShowInformation("name", "Show " + i);
+			shows[i] = show;
+		}
 	}
 
 	public static ShowDatabase getInstance() {
@@ -28,7 +35,15 @@ public class ShowDatabase {
 	public void removeShow(Show show) {
 	}
 
-	public void listShows() {
+	public String toString() {
+		String printout = "";
+		printout += "===========================\n";
+		printout += "Showings: \n";
+		for (int i = 0; i < shows.length; i++) {
+			printout += i + ": " + shows[i].getShowInformation("name");
+		}
+
+		return printout;
 	}
 
 	public Show[] sortByGenre() {

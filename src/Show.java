@@ -1,6 +1,6 @@
 import java.util.HashMap;
 
-public abstract class Show {
+public class Show {
 
 	private static final int MAX_ATTRIBUTES = 7;
 
