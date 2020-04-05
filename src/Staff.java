@@ -1,5 +1,5 @@
 public class Staff extends User{
-	
+
 	public void editVenueInformation(Venue venue) {
 		
 	}

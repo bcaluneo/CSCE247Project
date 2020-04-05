@@ -17,7 +17,6 @@ public class ShowUI {
 
 		// boolean interrupted = false;
 		// while (!interrupted) {
-		// }
 	}
 	
 	public void displayMainMenu() {
