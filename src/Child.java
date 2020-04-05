@@ -1,3 +1,4 @@
-public class Child {
+public class Child  extends User{
+	private User parent;
 	
 }
