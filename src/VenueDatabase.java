@@ -11,7 +11,7 @@ public class VenueDatabase {
 			venueDatabase  = new VenueDatabase();
 		}
 
-		return venueDatabase ;
+		return venueDatabase;
 	}
 
   public Venue getVenueByname(String name) {
@@ -25,5 +25,11 @@ public class VenueDatabase {
   }
 
   public void listVenues() {
+    System.out.println("===========================");
+    System.out.println("Venues: ");
+    for (int i = 0; i < venues.length; i++) {
+				String printout = venues[i];
+				System.out.println(i + ": " + venues);
+		}
   }
 }
