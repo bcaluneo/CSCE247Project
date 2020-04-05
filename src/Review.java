@@ -11,7 +11,7 @@ public class Review {
 	
 	public String toString() {
 		return "Author: "+this.author.getProfileInformation("username")
-			+"/nDescription: "+this.description
-			+"/nRating: "+this.rating+" Stars";
+			+"\nDescription: "+this.description
+			+"\nRating: "+this.rating+" Stars";
 	}
 }

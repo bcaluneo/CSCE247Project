@@ -9,6 +9,9 @@ public class Theater {
 	}
 	public void printSeats() {
 		int rows, columns;
+		System.out.print("Unbooked Seat: U\n"
+				+ "Unbooked Handicapped Seat: H\n"
+				+ "Booked Seat: B\n");
 		System.out.print("R\\C");
 		for(columns=0; columns<seats[0].length; columns++)
 			System.out.print("  "+(columns+1)+" ");

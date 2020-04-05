@@ -37,4 +37,11 @@ public class UserManager {
 	public User getUserByName(String username) {
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		ShowUI showUI= new ShowUI();
+		showUI.run();
+	}
 }
+
+
