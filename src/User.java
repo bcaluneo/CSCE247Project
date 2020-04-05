@@ -71,6 +71,7 @@ public class User {
 	public void bookShow(Venue venue, Theater theater, Show show, List<Seat> seats) {
 		BookedShow bookedShow = new BookedShow(venue, theater, show, seats);
 		bookedShows.add(bookedShow);
+		bookedShow.printTicket();
 	}
 
 	public void refundShow(Show show) {
