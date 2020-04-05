@@ -1,7 +1,9 @@
 public class Theater {
 	private Seat[][] seats;
-	
-	public Theater(char maxrows, int maxcolumns) {
+	private int theaterNumber;
+
+	public Theater(int theaterNumber, char maxrows, int maxcolumns) {
+		this.theaterNumber = theaterNumber;
 		seats = new Seat [maxrows-'A'+1][maxcolumns];
 		for(int rows=0; rows<seats.length; rows++)
 			for(int columns=0; columns<seats[0].length; columns++)
@@ -41,7 +43,7 @@ public class Theater {
 			System.out.print("----");
 		System.out.println();
 	}
-	
+
 	public boolean onlyHandicapped() {
 		for(int rows=0; rows<seats.length; rows++)
 			for(int columns=0; columns<seats[0].length; columns++)
@@ -49,7 +51,7 @@ public class Theater {
 					return false;
 		return true;
 	}
-	
+
 	public boolean isFull() {
 		for(int rows=0; rows<seats.length; rows++)
 			for(int columns=0; columns<seats[0].length; columns++)
@@ -57,12 +59,15 @@ public class Theater {
 					return false;
 		return true;
 	}
-	
+
 	public Seat[][] getSeats() {
 		return seats;
 	}
 	public void setSeats(Seat[][] seats) {
 		this.seats = seats;
 	}
-	
+
+	public int getTheaterNumber() {
+		return this.theaterNumber;
+	}
 }
