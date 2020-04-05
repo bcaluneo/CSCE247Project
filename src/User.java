@@ -4,13 +4,8 @@ import java.util.ArrayList;
 
 public class User {
 
-<<<<<<< HEAD
 	private static final int MAX_ATTRIBUTES = 13;
 	private static final int MAX_PAYMENT_INFO = 4;
-=======
-	private static final int MAX_SHOWS = 100;
-	private static final int MAX_ATTRIBUTES = 14;
->>>>>>> 3d5a3a5d9fe7d6a12c1a3eaf2052826c4b76fcf7
 
 	private HashMap<String, Object> profileInformation, paymentInformation;
 	private List<BookedShow> bookedShows;
