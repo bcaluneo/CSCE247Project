@@ -23,12 +23,14 @@ public class ShowUI {
 	}
 
 	public int getInput() {
-		printOptions();
+		
 		int selection = scanner.nextInt();
-		while (selection < 0 || selection >= options.length) {
+		/*while (selection < 0 || selection >= options.length) {
 			printOptions();
 			selection = scanner.nextInt();
-		}
+			}
+			*/
+		
 
 		return selection;
 	}
@@ -38,6 +40,7 @@ public class ShowUI {
 
 		boolean quit = false;
 		while (!quit) {
+			printOptions();
 			int selection = getInput();
 			switch (selection) {
 				case 0: /* Login */
@@ -50,9 +53,8 @@ public class ShowUI {
 					selection = getInput();
 					break;
 				case 3: /* Book */
-					selection = getInput();
-
-					/* Phase 1: Print out the venues.
+					bookingTix();
+					/*   Phase 1: Print out the venues.
 						 Phase 2: Select a venue.
 						 Phase 3: Select a showing.
 						 Phase 4: Select a theater and seat.
@@ -66,4 +68,11 @@ public class ShowUI {
 			}
 		}
 	}
+	
+	public void bookingTix() {
+		System.out.println(VenueDatabase.getInstance().toString());
+		int selection = getInput();
+		
+	}
+
 }

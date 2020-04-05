@@ -32,7 +32,8 @@ public class VenueDatabase {
     printout += "===========================\n";
     printout += "Venues: \n";
     for (int i = 0; i < venues.length; i++) {
-        printout += i + ": " + venues[i].toString();
+    	if(venues[i]!=null)
+    		printout += i + ": " + venues[i].toString();
 		}
 
     return printout;
