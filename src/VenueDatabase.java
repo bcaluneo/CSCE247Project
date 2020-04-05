@@ -8,7 +8,7 @@ public class VenueDatabase {
 
 	public static VenueDatabase getInstance() {
 		if (venueDatabase == null) {
-			venueDatabase  = new ShowDatabase();
+			venueDatabase  = new VenueDatabase();
 		}
 
 		return venueDatabase ;
