@@ -2,23 +2,23 @@
 public class Payment {
 	private User user;
 	private Venue venue;
-	private Room room;
+	private Theater theater;
 	private Show show;
-	private Seat seat
-	
-	public Payment(User user, Venue venue, Show show, Room room, Seat seat) {
+	private Seat seat;
+
+	public Payment(User user, Venue venue, Theater theater, Show show, Seat seat) {
 		this.user = user;
 		this.venue = venue;
+		this.theater = theater;
 		this.show = show;
-		this.room = room;
 		this.seat = seat;
 	}
-	
+
 	public void initiatePayment() {
-		
+
 	}
-	
+
 	public void cancelPayment() {
-		
+
 	}
 }

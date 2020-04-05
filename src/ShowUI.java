@@ -38,18 +38,6 @@ public class ShowUI {
 	public void run() {
 		System.out.println("Show System Started");
 
-<<<<<<< HEAD
-		// boolean interrupted = false;
-		// while (!interrupted) {
-	}
-	
-	public void displayMainMenu() {
-		
-	}
-	
-	public int getUserCommand(int numCommands) {
-		
-=======
 		boolean quit = false;
 		while (!quit) {
 			int selection = getInput();
@@ -72,6 +60,5 @@ public class ShowUI {
 					break;
 			}
 		}
->>>>>>> branch 'master' of https://github.com/bcaluneo/CSCE247Project.git
 	}
 }
