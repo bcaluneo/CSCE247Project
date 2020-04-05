@@ -4,6 +4,9 @@ public class VenueDatabase {
 
 	private VenueDatabase() {
 		venues = new Venue[100];
+    for (int i = 0; i < 5; i++) {
+      venues[i] = new Venue("Venue " + i, "Location " + i);
+    }
 	}
 
 	public static VenueDatabase getInstance() {
@@ -24,12 +27,14 @@ public class VenueDatabase {
   public void removeVenue(Venue venue) {
   }
 
-  public void listVenues() {
-    System.out.println("===========================");
-    System.out.println("Venues: ");
+  public String toString() {
+    String printout = "";
+    printout += "===========================\n";
+    printout += "Venues: \n";
     for (int i = 0; i < venues.length; i++) {
-				String printout = venues[i];
-				System.out.println(i + ": " + venues);
+        printout += i + ": " + venues[i].toString();
 		}
+
+    return printout;
   }
 }
