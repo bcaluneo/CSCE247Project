@@ -7,6 +7,7 @@ public class UserManager {
 
 	private UserManager() {
 		users = new User[100];
+		currentUser = new User();
 	}
 
 	public static UserManager getInstance() {
@@ -15,6 +16,10 @@ public class UserManager {
 		}
 
 		return userManager;
+	}
+
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
 	public void createUser(User user) {

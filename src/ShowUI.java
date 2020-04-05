@@ -3,10 +3,8 @@ import java.util.Scanner;
 public class ShowUI {
 
 	private Scanner scanner;
-	private ShowDatabase showdatabase;
-	private UserManager usermanager;
 
-	private String[] options = {"Login", "Create Account", "Search", "Book",
+	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
 															"Quit"};
 
 	public ShowUI() {
@@ -42,19 +40,26 @@ public class ShowUI {
 		while (!quit) {
 			int selection = getInput();
 			switch (selection) {
-				case 0:
+				case 0: /* Login */
 					selection = getInput();
 					break;
-				case 1:
+				case 1: /* Create Account */
 					selection = getInput();
 					break;
-				case 2:
+				case 2: /* Search */
 					selection = getInput();
 					break;
-				case 3:
+				case 3: /* Book */
 					selection = getInput();
+
+					/* Phase 1: Print out the venues.
+						 Phase 2: Select a venue.
+						 Phase 3: Select a showing.
+						 Phase 4: Select a theater and seat.
+						 Phase 5: Initiate the payment.
+						 Phase 6: Printout the tickets. */
 					break;
-				case 4:
+				case 4: /* Quit */
 					System.out.println("Quitting system...");
 					quit = true;
 					break;
