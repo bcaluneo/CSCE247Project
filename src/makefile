@@ -7,16 +7,14 @@ JC = javac
 JAR = jar
 
 CLASSES = \
-        Driver.java \
+				Driver.java \
 				Adult.java \
 				Age.java \
 				BookedShow.java \
 				Child.java \
 				Admin.java \
 				Genre.java \
-				Guest.java \
 				Movie.java \
-				Payment.java \
 				Review.java \
 				Seat.java \
 				Show.java \
