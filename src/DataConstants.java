@@ -17,4 +17,3 @@ public abstract class DataConstants {
 	protected static final int REWARDPOINTS = "rewardPoints";
 	protected static final int AGE_RESTRICTED = "isAgeRestricted";
 }
-int[3] {month, day, year}
