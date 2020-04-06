@@ -81,6 +81,7 @@ public class ShowUI {
 		scanner.nextLine();
 
 		processOrder(venue, theater, show, seats);
+		theater.printSeats();
 	}
 
 	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
