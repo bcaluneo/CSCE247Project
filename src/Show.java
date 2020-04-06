@@ -46,4 +46,20 @@ public class Show {
 
 	public void deleteReview(Review review) {
 	}
+
+	public String toString() {
+		String printout = "";
+		printout += "****" + "\n";
+		printout += "Name: " + getShowInformation("name") + "\n";
+		printout += "Age Rating: " + getShowInformation("ageRating") + "\n";
+		printout += "Genre: " + getShowInformation("genre") + "\n";
+		printout += "Average Rating: " + getAverageRating() + "\n";
+		printout += "Reviews: " + "\n";
+		for (Review review : reviews) {
+			printout += "\t" + review.toString();
+		}
+		printout += "****" + "\n";
+
+		return printout;
+	}
 }

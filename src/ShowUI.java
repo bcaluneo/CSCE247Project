@@ -31,7 +31,7 @@ public class ShowUI {
 		boolean quit = false;
 		while (!quit) {
 			printOptions();
-			int selection = scanner.nextInt();
+			int selection = Integer.parseInt(scanner.nextLine());
 			switch (selection) {
 				case 0: /* Login */
 					UserManager.getInstance().loginUser();
@@ -40,6 +40,7 @@ public class ShowUI {
 					UserManager.getInstance().createUser();
 					break;
 				case 2: /* Search */
+					search();
 					break;
 				case 3: /* Book */
 					bookTicket();
@@ -51,6 +52,91 @@ public class ShowUI {
 					quit = true;
 					break;
 			}
+		}
+	}
+
+	public void search() {
+		System.out.println("**Search System Pro**");
+		System.out.println("1. Search");
+		System.out.println("2. Sort");
+
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+		boolean search = selection == 1 ? true : false;
+
+		System.out.println("Options:");
+		System.out.println("1. Name");
+		System.out.println("2. Genre");
+		System.out.println("3. Age Rating");
+		System.out.println("4. List All");
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+
+		switch (selection) {
+			case 1:
+				if (!search) {
+					System.out.println(ShowDatabase.getInstance().sortByName());
+				} else {
+					System.out.print("Enter show name: ");
+					String showName = scanner.nextLine();
+
+					Show show = ShowDatabase.getInstance().getShowByName(showName);
+					if (show == null) {
+						System.out.println("That show is not in the database.");
+					} else {
+						System.out.println(show.toString());
+					}
+				}
+
+				break;
+			case 2:
+				if (!search) {
+					printShowList(ShowDatabase.getInstance().sortByGenre());
+				} else {
+					System.out.println("Options: ");
+					for (int i = 0; i < Genre.values().length; i++) {
+						System.out.println((i+1) + ". " + Genre.values()[i]);
+					}
+
+					System.out.print("Make a selection: ");
+					selection = Integer.parseInt(scanner.nextLine());
+
+					Genre genre = Genre.values()[selection-1];
+					if (genre != null) {
+						printShowList(ShowDatabase.getInstance().searchByGenre(genre));
+					}
+				}
+
+				break;
+			case 3:
+				if (!search) {
+					System.out.println(ShowDatabase.getInstance().sortByAgeRating());
+				} else {
+					System.out.println("Options: ");
+					for (int i = 0; i < Age.values().length; i++) {
+						System.out.println((i+1) + ". " + Age.values()[i]);
+					}
+
+					System.out.print("Make a selection: ");
+					selection = Integer.parseInt(scanner.nextLine());
+
+					Age ageRating = Age.values()[selection-1];
+					if (ageRating != null) {
+						printShowList(ShowDatabase.getInstance().searchByAgeRating(ageRating));
+					}
+				}
+
+				break;
+			case 4:
+				System.out.println(ShowDatabase.getInstance().toString());
+				break;
+		}
+	}
+
+	public void printShowList(List<Show> shows) {
+		for (Show show : shows) {
+			System.out.println(show.toString());
 		}
 	}
 
@@ -81,7 +167,7 @@ public class ShowUI {
 		scanner.nextLine();
 
 		processOrder(venue, theater, show, seats);
-		
+
 	}
 
 	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
