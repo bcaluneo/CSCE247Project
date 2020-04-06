@@ -41,11 +41,11 @@ public class User {
 	}
 
 	public void setProfileInformation(String key, Object value) {
-		/*if (profileInformation.get(key) == null) {
+		if (!profileInformation.containsKey(key)) {
 			System.out.println("error setProfileInformation(String, Object): no" +
 													"information found for that key.");
 			return;
-		}*/ /* TODO: Fix this. */
+		}
 
 		profileInformation.replace(key, value);
 	}
@@ -55,11 +55,11 @@ public class User {
 	}
 
 	public void setPaymentInformation(String key, Object value) {
-		/*if (paymentInformation.get(key) == null) {
+		if (!paymentInformation.containsKey(key)) {
 			System.out.println("error setProfileInformation(String, Object): no" +
 													"information found for that key.");
 			return;
-		}*/ /* TODO: Fix this. */
+		}
 
 		paymentInformation.replace(key, value);
 	}

@@ -28,11 +28,11 @@ public class Show {
 	}
 
 	public void setShowInformation(String key, Object value) {
-	/*	if (showInformation.get(key) == null) {
+		if (!showInformation.containsKey(key)) {
 			System.out.println("error setShowInformation(String, Object): no" +
 													"information found for that key.");
 			return;
-		}*/
+		}
 
 		showInformation.replace(key, value);
 	}
