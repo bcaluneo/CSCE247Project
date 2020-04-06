@@ -6,14 +6,15 @@ public abstract class DataConstants {
 	protected static final String NAME = "name";
 	protected static final String EMAIL = "email";
 	protected static final String PASSWORD = "password";
-	protected static final int DOB = "dob";
+	protected static final int[] DOB = "dob";
 	protected static final int ZIPCODE = "zipCode";
 	protected static final boolean DISCOUNT = "discount";
 	protected static final boolean IS_ADULT = "isAdult";
 	protected static final boolean IS_STAFF = "isStaff";
 	protected static final boolean IS_ADMIN = "isAdmin";
-	protected static final boolean IS_VIP = "isVIP";
+	protected static final boolean IS_VIP = "isVip";
 	protected static final boolean IS_HANDICAPPED = "isHandicapped";
 	protected static final int REWARDPOINTS = "rewardPoints";
 	protected static final int AGE_RESTRICTED = "isAgeRestricted";
 }
+int[3] {month, day, year}
