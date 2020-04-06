@@ -1,18 +1,26 @@
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONString;
+import org.json.JSONTokener;
+import org.json.JSONWriter;
+import org.json.CDL;
 
-public class DataLoader {
+
+
+public class DataLoader extends DataConstants {
 	
 	public static ArrayList<User> loadUser() {
 		ArrayList<User> users = new ArrayList<User>();
 		
 		try {
 			FileReader reader = new FileReader(USER_DATA);
-			JSONParser parser = new JSONParser();
-			JSONArray usersJSON = (JSONArray)new JSONParser().parse(reader);
+			CDL parser = new CDL();
+			JSONArray usersJSON = CDL.rowToJSONArray(new JSONTokener(reader));
+				
 			
 			for(int i=0; i < usersJSON.size(); i++) {
 				JSONObject userJSON = (JSONObject)usersJSON.get(i);

@@ -2,8 +2,11 @@
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONString;
+import org.json.JSONWriter;
 
 public class DataWriter extends DataConstants {
 	
@@ -19,7 +22,7 @@ public class DataWriter extends DataConstants {
 		
         try (FileWriter file = new FileWriter(USER_DATA)) {
  
-            file.write(jsonUsers.toJSONString());
+            file.write(jsonUsers.toString());
             file.flush();
  
         } catch (IOException e) {
@@ -40,7 +43,7 @@ public class DataWriter extends DataConstants {
 		profileInformation.put(IS_ADULT,user.getProfileInformation(isAdult));
 		profileInformation.put(IS_STAFF,user.getProfileInformation(isStaff));
 		profileInformation.put(IS_ADMIN,user.getProfileInformation(isAdmin));
-		profileInformation.put(IS_VIP,user.getProfileInformationisVip());
+		profileInformation.put(IS_VIP,user.getProfileInformation(isVip));
 		profileInformation.put(IS_HANDICAPPED,user.getProfileInformation(isHandicapped));
 		profileInformation.put(REWARDPOINTS,user.getProfileInformation(rewardPoints));
 		profileInformation.put(AGE_RESTRICTED,user.getProfileInformation(isAgeRestricted));
