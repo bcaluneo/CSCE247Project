@@ -17,6 +17,22 @@ public class BookedShow {
 		this.theater = theater;
 	}
 
+	public Show getShow() {
+		return show;
+	}
+
+	public Venue getVenue() {
+		return venue;
+	}
+
+	public List<Seat> getSeats() {
+		return seats;
+	}
+
+	public Theater getTheater() {
+		return theater;
+	}
+
 	public void printTicket() {
 		try {
 			PrintWriter pw = new PrintWriter(new File(show.getShowInformation("name") + " ticket stub.txt"));

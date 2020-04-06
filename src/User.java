@@ -76,4 +76,11 @@ public class User {
 
 	public void refundShow(Show show) {
 	}
+
+	public List<BookedShow> getBookedShows() {
+		return bookedShows;
+	}
+
+
+	
 }

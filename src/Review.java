@@ -9,6 +9,19 @@ public class Review {
 		this.rating = rating;
 	}
 	
+	public User getAuthor() {
+		return author;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public int getRating() {
+		return rating;
+	}
+
+
 	public String toString() {
 		return "Author: "+this.author.getProfileInformation("username")
 			+"\nDescription: "+this.description

@@ -45,6 +45,7 @@ public class ShowUI {
 					bookTicket();
 					break;
 				case 4: /* Rate */
+					rate();
 					break;
 				case 5: /* Quit */
 					System.out.println("Quitting system...");
@@ -125,5 +126,27 @@ public class ShowUI {
 		}
 
 		System.out.println("Seats successfully booked.");
+	}
+	
+	
+	public void rate() {
+		
+	//	System.out.println(ShowDatabase.getInstance().toString());
+
+		User user = UserManager.getInstance().getCurrentUser();
+		
+		for( int i = 0; i < user.getBookedShows().size(); i++) {
+			BookedShow show = user.getBookedShows().get(i);
+			System.out.println(show.getShow().getShowInformation("name"));
+		}			
+		int selection = scanner.nextInt();
+		
+		System.out.println("Rate the movie from 1 to 5 stars: ");
+		selection = scanner.nextInt();
+		scanner.nextLine();
+		System.out.println("Enter the Comment: ");
+		String comment = scanner.nextLine();
+		
+		Review review = new Review(user,comment,selection);
 	}
 }

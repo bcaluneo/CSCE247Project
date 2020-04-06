@@ -42,6 +42,7 @@ public class Show {
 	}
 
 	public void addReview(Review review) {
+		reviews.add(review);
 	}
 
 	public void deleteReview(Review review) {
