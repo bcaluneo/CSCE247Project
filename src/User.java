@@ -19,7 +19,7 @@ public class User {
 		profileInformation.put("name", null); /* String */
 		profileInformation.put("email", null); /* String */
 		profileInformation.put("password", null); /* String */
-		profileInformation.put("dob", null); /* String */
+		profileInformation.put("dob", null); /* int[3] {month, day, year} */
 		profileInformation.put("zipCode", null); /* int */
 		profileInformation.put("discount", null); /* boolean */
 		profileInformation.put("isAdult", null); /* boolean */
