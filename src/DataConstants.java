@@ -11,9 +11,9 @@ public abstract class DataConstants {
 	protected static final boolean DISCOUNT = "discount";
 	protected static final boolean IS_ADULT = "isAdult";
 	protected static final boolean IS_STAFF = "isStaff";
-	protected static final boolean IS_ADMIN = "isAdmin"
+	protected static final boolean IS_ADMIN = "isAdmin";
 	protected static final boolean IS_VIP = "isVIP";
 	protected static final boolean IS_HANDICAPPED = "isHandicapped";
-	protected static final REWARDPOINTS = "rewardPoints";
-	protected static final AGE_RESTRICTED = "isAgeRestricted";
+	protected static final int REWARDPOINTS = "rewardPoints";
+	protected static final int AGE_RESTRICTED = "isAgeRestricted";
 }
