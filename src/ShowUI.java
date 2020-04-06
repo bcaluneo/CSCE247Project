@@ -1,6 +1,5 @@
 import java.util.Scanner;
 import java.util.List;
-import java.nio.file.attribute.UserPrincipalLookupService;
 import java.util.ArrayList;
 
 public class ShowUI {
@@ -8,7 +7,7 @@ public class ShowUI {
 	private Scanner scanner;
 
 	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
-															"Rate", "Quit"};
+															"Rate", "Management", "Quit"};
 
 	public ShowUI() {
 		scanner = new Scanner(System.in);
@@ -48,11 +47,22 @@ public class ShowUI {
 				case 4: /* Rate */
 					rate();
 					break;
-				case 5: /* Quit */
+				case 5: /* Management */
+					showManagementOptions();
+					break;
+				case 6: /* Quit */
 					System.out.println("Quitting system...");
 					quit = true;
 					break;
 			}
+		}
+	}
+
+	public void showManagementOptions() {
+		User user = UserManager.getInstance().getCurrentUser();
+		if (!(user instanceof Admin) || !(user instanceof Staff)) {
+			System.out.println("You do not have access to these functions.");
+			return;
 		}
 	}
 
@@ -143,18 +153,17 @@ public class ShowUI {
 
 	public void bookTicket() {
 		System.out.println(VenueDatabase.getInstance().toString());
-		int selection = scanner.nextInt();
+		int selection = Integer.parseInt(scanner.nextLine());
 		Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
 		System.out.println(ShowDatabase.getInstance().toString());
-		selection = scanner.nextInt();
+		selection = Integer.parseInt(scanner.nextLine());
 		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
 		System.out.println(venue.toString());
-		selection = scanner.nextInt();
+		selection = Integer.parseInt(scanner.nextLine());
 		Theater theater = venue.getTheater(selection);
 		List<Seat> seats = new ArrayList<Seat>();
 		System.out.println("How many seats would you like to book?");
-		int seatCount = scanner.nextInt();
-		scanner.nextLine();
+		int seatCount = Integer.parseInt(scanner.nextLine());
 		theater.printSeats();
 		System.out.println("Select your seats: ");
 		String seat = scanner.nextLine();
@@ -222,11 +231,10 @@ public class ShowUI {
 			System.out.println(i + ": " + show.getShow().getShowInformation("name"));
 		}
 
-		int selection = scanner.nextInt();
+		int selection = Integer.parseInt(scanner.nextLine());
 		BookedShow toReview = user.getBookedShows().get(selection);
 		System.out.println("Rate the movie from 1 to 5 stars: ");
-		selection = scanner.nextInt();
-		scanner.nextLine();
+		selection = Integer.parseInt(scanner.nextLine());
 		System.out.println("Enter the Comment: ");
 		String comment = scanner.nextLine();
 
