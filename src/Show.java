@@ -28,11 +28,11 @@ public class Show {
 	}
 
 	public void setShowInformation(String key, Object value) {
-	/*	if (showInformation.get(key) == null) {
+		if (!showInformation.containsKey(key)) {
 			System.out.println("error setShowInformation(String, Object): no" +
 													"information found for that key.");
 			return;
-		}*/
+		}
 
 		showInformation.replace(key, value);
 	}
@@ -46,5 +46,21 @@ public class Show {
 	}
 
 	public void deleteReview(Review review) {
+	}
+
+	public String toString() {
+		String printout = "";
+		printout += "****" + "\n";
+		printout += "Name: " + getShowInformation("name") + "\n";
+		printout += "Age Rating: " + getShowInformation("ageRating") + "\n";
+		printout += "Genre: " + getShowInformation("genre") + "\n";
+		printout += "Average Rating: " + getAverageRating() + "\n";
+		printout += "Reviews: " + "\n";
+		for (Review review : reviews) {
+			printout += "\t" + review.toString();
+		}
+		printout += "****" + "\n";
+
+		return printout;
 	}
 }
