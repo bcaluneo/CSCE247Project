@@ -1,0 +1,3 @@
+[{"username":"Bob","name":"Richard","email":"bob@gmail.com","password":"bobtheman","dob":"11, 4, 1997","zipCode":"29000","discount":"true","isAdult":"true","isStaff":"false","isAdmin":"false","isVip":"false","isHandicapped":"false","rewardPoints":"10","isAgeRestricted":"false"}]
+
+/*{"username":"","name":"","email":"","password":"","dob":"","zipCode":"","discount":"","isAdult":"","isStaff":"","isAdmin":"","isVip":"","isHandicapped":"","rewardPoints":"","isAgeRestricted":""}*/
