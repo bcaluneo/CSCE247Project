@@ -8,10 +8,11 @@ public class UserManager {
 	private boolean loggedIn;
 	private User currentUser;
 	Scanner scanner = new Scanner(System.in);
-	
+
 	private UserManager() {
 		users = new ArrayList<User>();
 		currentUser = new User();
+		currentUser.setProfileInformation("username", "Anonymous");
 	}
 
 	public static UserManager getInstance() {
@@ -51,7 +52,7 @@ public class UserManager {
 				Continue = false;
 			}
 		}
-		
+
 		int month=0,day=0,year=0;
 		Continue = true;
 		while(Continue) {
@@ -85,7 +86,7 @@ public class UserManager {
 		}
 		int[] dob = {month,day,year};
 		user.setProfileInformation("dob", dob);
-		
+
 		System.out.println("Create a password");
 		string = scanner.next();
 		user.setProfileInformation("password", string);
@@ -93,7 +94,7 @@ public class UserManager {
 		currentUser = user;
 		System.out.println("Loggin in as "+user.getProfileInformation("username"));
 	}
-	
+
 	public boolean emailExists(String email) {
 		for(User user : users) {
 			if(user.getProfileInformation("email").equals(email)) {
@@ -102,7 +103,7 @@ public class UserManager {
 		}
 		return false;
 	}
-	
+
 	public boolean usernameExists(String username) {
 		for(User user : users) {
 			if(user.getProfileInformation("username").equals(username)) {
@@ -164,7 +165,5 @@ public class UserManager {
 		}
 		return null;
 	}
-	
+
 }
-
-

@@ -65,7 +65,7 @@ public class User {
 	}
 
 	public boolean isDefaultUser() {
-		return getProfileInformation("name") == null;
+		return getProfileInformation("username").equals("Anonymous"); /* Put this into a variable. */
 	}
 
 	public void bookShow(Venue venue, Theater theater, Show show, List<Seat> seats) {
@@ -80,7 +80,4 @@ public class User {
 	public List<BookedShow> getBookedShows() {
 		return bookedShows;
 	}
-
-
-	
 }

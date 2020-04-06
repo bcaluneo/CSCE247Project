@@ -152,23 +152,20 @@ public class ShowUI {
 		selection = scanner.nextInt();
 		Theater theater = venue.getTheater(selection);
 		List<Seat> seats = new ArrayList<Seat>();
-		char row;
-		int column;
 		System.out.println("How many seats would you like to book?");
 		int seatCount = scanner.nextInt();
+		scanner.nextLine();
 		theater.printSeats();
 		System.out.println("Select your seats: ");
+		String seat = scanner.nextLine();
 		while (seatCount != 0) {
-			row = scanner.next().charAt(0);
-			column = scanner.nextInt();
+			char row = seat.charAt(0);
+			int column = Integer.parseInt(""+seat.charAt(1));
 			seats.add(theater.getSeats()[row-'A'][column]); /* TODO: Change this. */
 			seatCount--;
 		}
 
-		scanner.nextLine();
-
 		processOrder(venue, theater, show, seats);
-
 	}
 
 	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
@@ -202,7 +199,7 @@ public class ShowUI {
 		}
 
 		System.out.println("Would you like to checkout? (y/n)");
-		char choice = scanner.next().charAt(0);
+		char choice = scanner.nextLine().charAt(0);
 		if (choice == 'y') {
 			for (Seat s : seats) {
 				venue.bookSeat(theater, s.getSeatRow(), s.getSeatColumn());
@@ -213,26 +210,27 @@ public class ShowUI {
 
 		System.out.println("Seats successfully booked.");
 	}
-	
-	
-	public void rate() {
-		
-	//	System.out.println(ShowDatabase.getInstance().toString());
 
+
+	public void rate() {
 		User user = UserManager.getInstance().getCurrentUser();
-		
+		if (user.getBookedShows().size() == 0) return;
+
+
 		for( int i = 0; i < user.getBookedShows().size(); i++) {
 			BookedShow show = user.getBookedShows().get(i);
-			System.out.println(show.getShow().getShowInformation("name"));
-		}			
+			System.out.println(i + ": " + show.getShow().getShowInformation("name"));
+		}
+
 		int selection = scanner.nextInt();
-		
+		BookedShow toReview = user.getBookedShows().get(selection);
 		System.out.println("Rate the movie from 1 to 5 stars: ");
 		selection = scanner.nextInt();
 		scanner.nextLine();
 		System.out.println("Enter the Comment: ");
 		String comment = scanner.nextLine();
-		
-		Review review = new Review(user,comment,selection);
+
+		Review review = new Review(user, comment, selection);
+		toReview.getShow().addReview(review);
 	}
 }

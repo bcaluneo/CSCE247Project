@@ -38,7 +38,14 @@ public class Show {
 	}
 
 	public double getAverageRating() {
-		return -1;
+		if (reviews.size() == 0) return -1;
+		
+		int sum = 0;
+		for (Review review : reviews) {
+			sum += review.getRating();
+		}
+
+		return sum / reviews.size();
 	}
 
 	public void addReview(Review review) {
@@ -57,9 +64,9 @@ public class Show {
 		printout += "Average Rating: " + getAverageRating() + "\n";
 		printout += "Reviews: " + "\n";
 		for (Review review : reviews) {
-			printout += "\t" + review.toString();
+			printout += review.toString();
 		}
-		printout += "****" + "\n";
+		printout += "\n" + "****" + "\n";
 
 		return printout;
 	}
