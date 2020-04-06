@@ -1,6 +1,6 @@
 
 public abstract class DataConstants {
-	protected static final String USER_DATA = "src/USER.json";
+	protected static final String USER_DATA = "src/USER_DATA.json";
 	protected static final String USER = "user";
 	protected static final String USERNAME = "username";
 	protected static final String NAME = "name";
