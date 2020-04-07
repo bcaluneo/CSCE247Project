@@ -39,7 +39,7 @@ public class Show {
 
 	public double getAverageRating() {
 		if (reviews.size() == 0) return -1;
-		
+
 		int sum = 0;
 		for (Review review : reviews) {
 			sum += review.getRating();
@@ -48,11 +48,20 @@ public class Show {
 		return sum / reviews.size();
 	}
 
+	public Review getReviewByAuthor(String author) {
+		for (Review review : reviews) {
+			String username = ""+review.getAuthor().getProfileInformation("username");
+			if (username.equals(author)) return review;
+		}
+		return null;
+	}
+
 	public void addReview(Review review) {
 		reviews.add(review);
 	}
 
 	public void deleteReview(Review review) {
+		reviews.remove(review);
 	}
 
 	public String toString() {

@@ -1,9 +1,12 @@
+import java.util.List;
+import java.util.ArrayList;
+
 public class VenueDatabase {
   private static VenueDatabase venueDatabase;
-	private Venue[] venues;
+	private List<Venue> venues;
 
 	private VenueDatabase() {
-		venues = new Venue[100];
+    venues = new ArrayList<Venue>();
     for (int i = 0; i < 5; i++) {
       venues[i] = new Venue("Venue " + i, "Location " + i);
     }
@@ -21,14 +24,24 @@ public class VenueDatabase {
     return venues[index];
   }
 
-  public Venue getVenueByname(String name) {
+  public Venue getVenueByName(String name) {
+    for (Venue venue : venues) {
+      if (venue.getName().equals(name)) return venue;
+    }
+
     return null;
   }
 
+  public void updateVenue(Venue venue, int index) {
+    venues.set(index, venue);
+  }
+
   public void addVenue(Venue venue) {
+    venues.add(venue);
   }
 
   public void removeVenue(Venue venue) {
+    venues.remove(venue);
   }
 
   public String toString() {
