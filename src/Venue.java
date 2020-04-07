@@ -23,10 +23,10 @@ public class Venue {
 	public void refundSeat() {
 	}
 
-	public void addTheater() {
+	public void addTheater(Theater[] theater) {
 	}
 
-	public void deleteTheater() {
+	public void deleteTheater(Theater[] theater) {
 	}
 
 	public String toString() {
