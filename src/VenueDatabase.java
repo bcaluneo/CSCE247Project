@@ -8,7 +8,7 @@ public class VenueDatabase {
 	private VenueDatabase() {
     venues = new ArrayList<Venue>();
     for (int i = 0; i < 5; i++) {
-      venues[i] = new Venue("Venue " + i, "Location " + i);
+      venues.add(new Venue("Venue " + i, "Location " + i));
     }
 	}
 
@@ -21,7 +21,7 @@ public class VenueDatabase {
 	}
 
   public Venue getVenueByIndex(int index) {
-    return venues[index];
+    return venues.get(index);
   }
 
   public Venue getVenueByName(String name) {
@@ -48,9 +48,9 @@ public class VenueDatabase {
     String printout = "";
     printout += "===========================\n";
     printout += "Venues: \n";
-    for (int i = 0; i < venues.length; i++) {
-    	if(venues[i]!=null)
-    		printout += i + ": " + venues[i].getName() +"\n";
+    for (int i = 0; i < venues.size(); i++) {
+    	if(venues.get(i)!=null)
+    		printout += i + ": " + venues.get(i).getName() +"\n";
 		}
 
     return printout;
