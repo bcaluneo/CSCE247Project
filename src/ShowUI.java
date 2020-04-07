@@ -33,10 +33,10 @@ public class ShowUI {
 			int selection = Integer.parseInt(scanner.nextLine());
 			switch (selection) {
 				case 0: /* Login */
-					UserManager.getInstance().loginUser();
+					UserManager.getInstance().login();
 					break;
 				case 1: /* Create Account */
-					UserManager.getInstance().createUser();
+					createAccount();
 					break;
 				case 2: /* Search */
 					search();
@@ -63,6 +63,21 @@ public class ShowUI {
 		if (!(user instanceof Admin) || !(user instanceof Staff)) {
 			System.out.println("You do not have access to these functions.");
 			return;
+		}
+	}
+	
+	public void createAccount() {
+		System.out.println("Are you a child or adult? Enter \"child\" or \"adult\"");
+		String person = scanner.nextLine();
+		if(person.equals("child")) {
+			System.out.println("Your parent must enter their loggin information first.");
+			User parent = UserManager.getInstance().loginUser();
+			if(parent!=null) {
+				System.out.println("Parent information confimed");
+				UserManager.getInstance().createChildAccount(parent);
+			}
+		} else if(person.equals("adult")) {
+			UserManager.getInstance().createAdultAccount();
 		}
 	}
 

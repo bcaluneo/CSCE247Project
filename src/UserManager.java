@@ -27,7 +27,7 @@ public class UserManager {
 		return currentUser;
 	}
 
-	public void createUser() {
+	public User createUser() {
 		User user = new User();
 		boolean Continue = true;
 		String string;
@@ -53,46 +53,70 @@ public class UserManager {
 			}
 		}
 
-		int month=0,day=0,year=0;
-		Continue = true;
-		while(Continue) {
-			System.out.println("Enter your date of birth month");
-			month = scanner.nextInt();
-			if(month>12 || month<1) {
-				System.out.println("Number entered is invalid");
-			} else {
-				Continue=false;
-			}
-		}
-		Continue = true;
-		while(Continue) {
-			System.out.println("Enter your date of birth day");
-			day = scanner.nextInt();
-			if(day<1||day>31) {
-				System.out.println("Number entered is invalid");
-			} else {
-				Continue=false;
-			}
-		}
-		Continue = true;
-		while(Continue) {
-			System.out.println("Enter your date of birth year");
-			year = scanner.nextInt();
-			if(year>2020 || year<1900) {
-				System.out.println("Number entered is invalid");
-			} else {
-				Continue=false;
-			}
-		}
-		int[] dob = {month,day,year};
-		user.setProfileInformation("dob", dob);
-
 		System.out.println("Create a password");
 		string = scanner.next();
 		user.setProfileInformation("password", string);
-		users.add(user);
-		currentUser = user;
-		System.out.println("Loggin in as "+user.getProfileInformation("username"));
+		return user;
+	}
+	
+	public void createAdultAccount() {
+		Adult adult = new Adult();
+		int[] dob = makeDob();
+		while(dob[2]>2008) {
+			System.out.println("Age entered is too young.");
+			dob = makeDob();
+		}
+		User user = createUser();
+		adult.setProfileInformation("username", user.getProfileInformation("username"));
+		adult.setProfileInformation("email", user.getProfileInformation("email"));
+		adult.setProfileInformation("password", user.getProfileInformation("password"));
+		adult.setProfileInformation("dob", dob);
+		adult.setProfileInformation("isAdult", true);
+		currentUser = adult;
+		users.add(adult);
+		System.out.println("Logging in as "+adult.getProfileInformation("username"));
+		this.loggedIn=true;
+	}
+	
+	public void createChildAccount(User parent) {
+		if(parent instanceof Child) {
+			System.out.println("You cannot use a child account as the parent.");
+		} else {
+			Child child = new Child();
+			child.setParent(parent);
+			int[] dob = makeDob();
+			while(dob[2]<2008) {
+				System.out.println("Age entered is too old.");
+				dob = makeDob();
+			}
+			User user = createUser();
+			child.setProfileInformation("username", user.getProfileInformation("username"));
+			child.setProfileInformation("email", user.getProfileInformation("email"));
+			child.setProfileInformation("password", user.getProfileInformation("password"));
+			child.setProfileInformation("dob", dob);
+			child.setProfileInformation("discount", true);
+			currentUser = child;
+			users.add(child);
+			
+			System.out.println("Logging in as "+child.getProfileInformation("username"));
+			this.loggedIn=true;
+		}
+	}
+	
+	public void setAsStaff(User user) {
+		if(emailExists(String.valueOf(user.getProfileInformation("email")))) {
+			user.setProfileInformation("isStaff", true);
+		}else {
+			System.out.println("Account doesn't exist");
+		}
+	}
+	
+	public void setAsAdmin(User user) {
+		if(emailExists(String.valueOf(user.getProfileInformation("email")))) {
+			user.setProfileInformation("isAdmin", true);
+		}else {
+			System.out.println("Account doesn't exist");
+		}
 	}
 
 	public boolean emailExists(String email) {
@@ -112,6 +136,57 @@ public class UserManager {
 		}
 		return false;
 	}
+	
+	public int[] makeDob() {
+		int month=0,day=0,year=0;
+		boolean Continue = true;
+		while(Continue) {
+			try {
+				System.out.println("Enter your date of birth month");
+				month = scanner.nextInt();
+				if(month>12 || month<1) {
+					System.out.println("Number entered is invalid");
+				} else {
+					Continue=false;
+				}
+			} catch(Exception exception) {
+				System.out.println("Invalid input.");
+				scanner.next();
+			}
+		}
+		Continue = true;
+		while(Continue) {
+			try {
+				System.out.println("Enter your date of birth day");
+				day = scanner.nextInt();
+				if(day<1||day>31) {
+					System.out.println("Number entered is invalid");
+				} else {
+					Continue=false;
+				}
+			} catch(Exception exception) {
+				System.out.println("Invalid input.");
+				scanner.next();
+			}
+		}
+		Continue = true;
+		while(Continue) {
+			try {
+				System.out.println("Enter your date of birth year");
+				year = scanner.nextInt();
+				if(year>2020 || year<1900) {
+					System.out.println("Number entered is invalid");
+				} else {
+					Continue=false;
+				}
+			} catch(Exception exception) {
+				System.out.println("Invalid input.");
+				scanner.next();
+			}
+		}
+		int[] dob = {month,day,year};
+		return dob;
+	}
 
 	public void deleteUser(String email) {
 		if(emailExists(email)){
@@ -125,18 +200,31 @@ public class UserManager {
 		}
 	}
 
-	public void loginUser() {
+	public void login() {
+		this.currentUser=loginUser();
+		if(this.currentUser!=null) {
+			System.out.println("Logging in as "+currentUser.getProfileInformation("username"));
+			this.loggedIn=true;
+		}
+	}
+	
+	
+	public User loginUser() {
 		User user = new User();
 		boolean Continue = true;
 		String string;
 		while(Continue){
 			System.out.println("Enter your email");
-			string = scanner.next();
+			string = scanner.nextLine();
 			if(emailExists(string)) {
 				user = getUserByEmail(string);
 				Continue = false;
 			} else {
-				System.out.println("Email is invalid");
+				System.out.println("Email is invalid, go back to menu? Enter \"yes\" or \"no\"");
+				string = scanner.nextLine();
+				if(string.equals("yes")) {
+					return null;
+				}
 			}
 		}
 		Continue=true;
@@ -144,17 +232,23 @@ public class UserManager {
 			System.out.println("Enter your password");
 			string = scanner.next();
 			if(user.getProfileInformation("password").equals(string)) {
-				this.currentUser=user;
-				System.out.println("Loggin in as "+user.getProfileInformation("username"));
 				Continue = false;
 			} else {
-				System.out.println("Password is invalid");
+				System.out.println("Password is invalid, go back to menu? Enter \"yes\" or \"no\"");
+				string = scanner.nextLine();
+				if(string.equals("yes")) {
+					return null;
+				}
 			}
 		}
+		return user;
 	}
 
+
 	public void logoutUser() {
+		System.out.println("Logging out");
 		this.currentUser=null;
+		this.loggedIn=false;
 	}
 
 	public User getUserByEmail(String email) {
