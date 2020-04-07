@@ -3,6 +3,11 @@ import java.util.List;
 import java.io.IOException;
 import java.io.File;
 
+/**
+ * 
+ * @author Brendan Caluneo
+ * this class keeps track of all the booked shows or movies in a list by a user
+ */
 public class BookedShow {
 
 	private Show show;
@@ -10,6 +15,13 @@ public class BookedShow {
 	private List<Seat> seats;
 	private Theater theater;
 
+	/**
+	 * constructor 
+	 * @param venue
+	 * @param theater
+	 * @param show
+	 * @param seats
+	 */
 	public BookedShow(Venue venue, Theater theater, Show show, List<Seat> seats) {
 		this.show = show;
 		this.venue = venue;
@@ -17,6 +29,10 @@ public class BookedShow {
 		this.theater = theater;
 	}
 
+	/**
+	 * getters
+	 * returns each variable
+	 */
 	public Show getShow() {
 		return show;
 	}
@@ -33,6 +49,9 @@ public class BookedShow {
 		return theater;
 	}
 
+	/**
+	 * this method prints out a ticket which is booked in a text file
+	 */
 	public void printTicket() {
 		try {
 			PrintWriter pw = new PrintWriter(new File(show.getShowInformation("name") + " ticket stub.txt"));
@@ -51,6 +70,9 @@ public class BookedShow {
 		}
 	}
 
+	/**
+	 * this method sends the ticket virtually to user email given
+	 */
 	public void emailTicket() {
 	}
 }
