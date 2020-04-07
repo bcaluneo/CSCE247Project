@@ -65,7 +65,7 @@ public class ShowUI {
 			return;
 		}
 	}
-	
+
 	public void createAccount() {
 		System.out.println("Are you a child or adult? Enter \"child\" or \"adult\"");
 		String person = scanner.nextLine();
@@ -181,12 +181,14 @@ public class ShowUI {
 		int seatCount = Integer.parseInt(scanner.nextLine());
 		theater.printSeats();
 		System.out.println("Select your seats: ");
-		String seat = scanner.nextLine();
+		String seat = "";
 		while (seatCount != 0) {
+			seat = scanner.nextLine();
 			char row = seat.charAt(0);
 			int column = Integer.parseInt(""+seat.charAt(1));
 			seats.add(theater.getSeats()[row-'A'][column]); /* TODO: Change this. */
 			seatCount--;
+			System.out.println(true);
 		}
 
 		processOrder(venue, theater, show, seats);
