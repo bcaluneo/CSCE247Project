@@ -69,21 +69,17 @@ public class UserManager {
 	}
 
 	public void createAdultAccount() {
-		Adult adult = new Adult();
 		int[] dob = makeDob();
 		while(dob[2]>2008) {
 			System.out.println("Age entered is too young.");
 			dob = makeDob();
 		}
 		User user = createUser();
-		adult.setProfileInformation("username", user.getProfileInformation("username"));
-		adult.setProfileInformation("email", user.getProfileInformation("email"));
-		adult.setProfileInformation("password", user.getProfileInformation("password"));
-		adult.setProfileInformation("dob", dob);
-		adult.setProfileInformation("isAdult", true);
-		currentUser = adult;
-		users.add(adult);
-		System.out.println("Logging in as "+adult.getProfileInformation("username"));
+		user.setProfileInformation("dob", dob);
+		user.setProfileInformation("isAdult", true);
+		currentUser = user;
+		users.add(user);
+		System.out.println("Logging in as "+user.getProfileInformation("username"));
 		this.loggedIn=true;
 	}
 
