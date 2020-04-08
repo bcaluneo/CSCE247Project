@@ -59,6 +59,11 @@ public class BookedShow {
 			pw.println("Venue: " + venue.getName());
 			pw.println("Theater: " + theater.getTheaterNumber());
 			pw.println("Total Price: " + (Double.parseDouble(""+show.getShowInformation("price"))*seats.size()));
+			pw.println("Times: ");
+			for (String s : (ArrayList<String>) show.getShowInformation("times")){
+				pw.println("\t" + s);
+			}
+			
 			pw.println("Seats: ");
 			for (Seat s : seats) {
 				pw.println("" + s.getSeatRow() + "" + s.getSeatColumn());
