@@ -75,9 +75,6 @@ public class UserManager {
 			dob = makeDob();
 		}
 		User user = createUser();
-		user.setProfileInformation("username", user.getProfileInformation("username"));
-		user.setProfileInformation("email", user.getProfileInformation("email"));
-		user.setProfileInformation("password", user.getProfileInformation("password"));
 		user.setProfileInformation("dob", dob);
 		user.setProfileInformation("isAdult", true);
 		currentUser = user;
