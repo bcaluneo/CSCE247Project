@@ -11,16 +11,6 @@ public class UserManager {
 	private UserManager() {
 		users = DataLoader.loadUsers();
 		currentUser = new User();
-
-		User adminAccount = new User();
-		adminAccount.setProfileInformation("username", "Master Control");
-		adminAccount.setProfileInformation("email", "def@email.com");
-		adminAccount.setProfileInformation("password", "1234");
-		adminAccount.setProfileInformation("isStaff", true);
-		adminAccount.setProfileInformation("isAdmin", true);
-
-		users.add(currentUser);
-		users.add(adminAccount);
 	}
 
 	public static UserManager getInstance() {
