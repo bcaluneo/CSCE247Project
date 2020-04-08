@@ -419,7 +419,6 @@ public class ShowUI {
 			int column = Integer.parseInt(""+seat.charAt(1));
 			seats.add(theater.getSeats()[row-'A'][column]); /* TODO: Change this. */
 			seatCount--;
-			System.out.println(true);
 		}
 
 		processOrder(venue, theater, show, seats);
