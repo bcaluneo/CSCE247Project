@@ -9,12 +9,13 @@ public class User {
 
 	private HashMap<String, Object> profileInformation, paymentInformation;
 	private List<BookedShow> bookedShows;
-	private ArrayList<User> children;
+	private List<User> children;
 
 	public User() {
 		this.profileInformation = new HashMap<String, Object>(MAX_ATTRIBUTES);
 		this.paymentInformation = new HashMap<String, Object>(MAX_PAYMENT_INFO);
 		this.bookedShows = new ArrayList<BookedShow>();
+		this.children = new ArrayList<User>();
 
 		profileInformation.put("username", "Anonymous"); /* String */
 		profileInformation.put("name", ""); /* String */
@@ -89,15 +90,15 @@ public class User {
 	public List<BookedShow> getBookedShows() {
 		return bookedShows;
 	}
-	
-	public ArrayList<User> getChildren() {
+
+	public List<User> getChildren() {
 		return children;
 	}
-	
+
 	public void addChild(User child) {
 		this.children.add(child);
 	}
-	
+
 	public void removeChild(User child) {
 		this.children.remove(child);
 	}
