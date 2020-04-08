@@ -2,11 +2,11 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 
 /**
- *
- * @author Brendan Caluneo
  * this class keeps track of all the booked shows or movies in a list by a user
+ * @author Brendan Caluneo
  */
 public class BookedShow {
 
@@ -29,10 +29,6 @@ public class BookedShow {
 		this.theater = theater;
 	}
 
-	/**
-	 * getters
-	 * returns each variable
-	 */
 	public Show getShow() {
 		return show;
 	}
@@ -50,7 +46,7 @@ public class BookedShow {
 	}
 
 	/**
-	 * this method prints out a ticket which is booked in a text file
+	 * Prints out a ticket for a booked show.
 	 */
 	public void printTicket() {
 		try {
@@ -63,7 +59,7 @@ public class BookedShow {
 			for (String s : (ArrayList<String>) show.getShowInformation("times")){
 				pw.println("\t" + s);
 			}
-			
+
 			pw.println("Seats: ");
 			for (Seat s : seats) {
 				pw.println("" + s.getSeatRow() + "" + s.getSeatColumn());
