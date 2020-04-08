@@ -248,7 +248,7 @@ public class UserManager {
 
 	public void logoutUser() {
 		System.out.println("Logging out");
-		this.currentUser=null;
+		this.currentUser = new User();
 	}
 
 	public User getUserByEmail(String email) {

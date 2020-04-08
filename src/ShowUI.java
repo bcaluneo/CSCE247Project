@@ -7,7 +7,7 @@ public class ShowUI {
 	private Scanner scanner;
 
 	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
-															"Rate", "Management", "Quit"};
+															"Rate", "Management", "Account Info", "Quit"};
 
 	private String[] mgtOptions = {"Add Venue", "Remove Venue", "Edit Venue",
 																 "Remove Review", "Modify Account",
@@ -65,7 +65,10 @@ public class ShowUI {
 				case 5: /* Management */
 					mangementMode();
 					break;
-				case 6: /* Quit */
+				case 6:/* Account Info */
+					accountInfo();
+					break;
+				case 7: /* Quit */
 					System.out.println("Quitting system...");
 					quit = true;
 					break;
@@ -306,6 +309,14 @@ public class ShowUI {
 			}
 		} else if(person.equals("adult")) {
 			UserManager.getInstance().createAdultAccount();
+		}
+	}
+	
+	public void accountInfo() {
+		if(!UserManager.getInstance().getCurrentUser().isDefaultUser()) {
+			System.out.println("");
+		} else {
+			System.out.println("You must login to view your account information.");
 		}
 	}
 
