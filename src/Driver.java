@@ -1,8 +1,8 @@
 
 /**
+ * Driver class for the system
  * 
- * @author Brendan
- * driver class
+ * @author Team Blue
  */
 public class Driver {
 

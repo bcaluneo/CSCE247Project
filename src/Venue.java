@@ -1,11 +1,22 @@
+/**
+ * A venue that contains a list of theaters.
+ * @author Team Blue
+ *
+ */
 public class Venue {
 
+	/** The maximum amount of theaters. */
 	private static final int MAX_THEATERS = 10;
 
 	private String name, location;
 	private Review review;
 	private Theater[] theaters;
 
+	/**
+	 * Creates a theater instance with the given name and location.
+	 * @param name
+	 * @param location
+	 */
 	public Venue(String name, String location) {
 		this.name = name;
 		this.location = location;
@@ -16,16 +27,33 @@ public class Venue {
 		}
 	}
 
+	/**
+	 * Books a seat within a theater.
+	 * @param theater
+	 * @param row
+	 * @param column
+	 */
 	public void bookSeat(Theater theater, char row, int column) {
 		theater.getSeats()[row-'A'][column].setBooked(true);
 	}
 
+	/**
+	 * Refunds the seat to the user that booked it.
+	 */
 	public void refundSeat() {
 	}
 
+	/**
+	 * Adds a theater to the venue's list of theaters.
+	 * @param theater
+	 */
 	public void addTheater(Theater[] theater) {
 	}
 
+	/**
+	 * Removes a theater from the venue's list of theaters.
+	 * @param theater
+	 */
 	public void deleteTheater(Theater[] theater) {
 	}
 

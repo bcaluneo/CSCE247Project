@@ -1,10 +1,9 @@
+/**
+ * A list of show genres.
+ * 
+ * @author Team Blue
+ *
+ */
 public enum Genre {
-	ADVACT, /* Adventure-Action */
-	COMEDY,
-	FANTASY,
-	HORROR,
-	OTHER,
-	ROMANCE,
-	SCIFI,
-	THRILLER;
+	ADVACT, COMEDY, FANTASY, HORROR, OTHER, ROMANCE, SCIFI, THRILLER;
 }

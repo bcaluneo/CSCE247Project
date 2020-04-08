@@ -1,16 +1,12 @@
 
 /**
- * 
- * @author RaviPatel
  * class for user as child in the system
+ * 
+ * @author Team Blue
  */
-public class Child  extends User{
+public class Child extends User {
 	private User parent;
 
-	/**
-	 * getters and setters 
-	 * @return variable
-	 */
 	public User getParent() {
 		return parent;
 	}
@@ -18,5 +14,5 @@ public class Child  extends User{
 	public void setParent(User parent) {
 		this.parent = parent;
 	}
-	
+
 }

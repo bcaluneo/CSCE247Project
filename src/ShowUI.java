@@ -2,21 +2,34 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * The interface for the system.
+ * @author Team Blue
+ *
+ */
 public class ShowUI {
 
+	/** The mechanism through which the user is going to input keystrokes into the program. */
 	private Scanner scanner;
 
+	/** The list of menu options. */
 	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
 															"Rate", "Management", "Quit"};
 
+	/** The list of management menu options. */
 	private String[] mgtOptions = {"Add Venue", "Remove Venue", "Edit Venue",
 																 "Remove Review", "Modify Account",
 																 "Add Show", "Remove Show", "Exit"};
-
+	/**
+	 * Initializes the show interface.
+	 */
 	public ShowUI() {
 		scanner = new Scanner(System.in);
 	}
 
+	/**
+	 * Prints the list of menu options.
+	 */
 	public void printOptions() {
 		System.out.println("===========================");
 		System.out.println("Options:");
@@ -28,6 +41,9 @@ public class ShowUI {
 		System.out.print("Make a selection: ");
 	}
 
+	/**
+	 * Prints the list of management menu options.
+	 */
 	public void printMgtOptions() {
 		System.out.println("===========================");
 		System.out.println("Mangement Mode:");
@@ -39,6 +55,9 @@ public class ShowUI {
 		System.out.print("Make a selection: ");
 	}
 
+	/**
+	 * Runs the system.
+	 */
 	public void run() {
 		System.out.println("Show System Started");
 
@@ -73,9 +92,12 @@ public class ShowUI {
 		}
 	}
 
+	/**
+	 * Allows staff to make changes to the program database's.
+	 */
 	public void mangementMode() {
 		User user = UserManager.getInstance().getCurrentUser();
-		if (!user.isAdmin() || !user.isStaff()) {
+		if (!user.isAdmin() && !user.isStaff()) {
 			System.out.println("You do not have access to these functions.");
 			return;
 		}
@@ -115,6 +137,9 @@ public class ShowUI {
 
 	/* Management Functions */
 
+	/**
+	 * Allows staff to edit venue information.
+	 */
 	public void editVenue() {
 		System.out.println(VenueDatabase.getInstance().toString());
 		System.out.print("Make a selection: ");
@@ -149,6 +174,9 @@ public class ShowUI {
 		DataWriter.writeVenues();
 	}
 
+	/**
+	 * Allows staff to add venues.
+	 */
 	public void addVenue() {
 		System.out.print("Enter Venue Name: ");
 		String venueName = scanner.nextLine();
@@ -161,6 +189,9 @@ public class ShowUI {
 		DataWriter.writeVenues();
 	}
 
+	/**
+	 * Allows staff to remove a venue.
+	 */
 	public void removeVenue() {
 		System.out.println(VenueDatabase.getInstance().toString());
 		System.out.print("Make a selection: ");
@@ -178,6 +209,9 @@ public class ShowUI {
 		DataWriter.writeVenues();
 	}
 
+	/**
+	 * Allows admins to remove reviews from a show.
+	 */
 	public void removeReview() {
 		if (!UserManager.getInstance().getCurrentUser().isAdmin()) {
 			System.out.println("You do not have access to this function.");
@@ -189,7 +223,7 @@ public class ShowUI {
 		int selection = Integer.parseInt(scanner.nextLine());
 
 		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
-		System.out.println(show.toString());
+		System.out.println(show.toString(true));
 
 		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
@@ -202,6 +236,9 @@ public class ShowUI {
 		DataWriter.writeShows();
 	}
 
+	/**
+	 * Allows admins to elevate accounts to either staff or admins.
+	 */
 	public void modifyAccount() {
 		if (!UserManager.getInstance().getCurrentUser().isAdmin()) {
 			System.out.println("You do not have access to this function.");
@@ -218,25 +255,38 @@ public class ShowUI {
 		}
 
 		System.out.println("Options:");
-		System.out.println("1. Elevate To Staff");
-		System.out.println("2. Elevate To Admin");
+		System.out.println("1. Toggle Staff Access");
+		System.out.println("2. Toggle Admin Access");
 
 		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
 
 		if (selection == 1) {
-			UserManager.getInstance().setAsStaff(user);
-			System.out.println("User " + user.getProfileInformation("username") +
-												 " successfully elevated to staff.");
+			UserManager.getInstance().toggleStaffAccount(user);
+			if (user.isStaff()) {
+				System.out.println("User " + user.getProfileInformation("username") +
+						 " successfully promoted to staff.");
+			} else {
+				System.out.println("User " + user.getProfileInformation("username") +
+						 " successfully demoted from staff.");
+			}
 		} else if (selection == 2) {
-			UserManager.getInstance().setAsAdmin(user);
-			System.out.println("User " + user.getProfileInformation("username") +
-												 " successfully elevated to admin.");
+			UserManager.getInstance().toggleAdminAccount(user);
+			if (user.isAdmin()) {
+				System.out.println("User " + user.getProfileInformation("username") +
+						 " successfully promoted to admin.");
+			} else {
+				System.out.println("User " + user.getProfileInformation("username") +
+						 " successfully demoted from admin.");
+			}
 		}
 		
 		DataWriter.writeUsers();
 	}
 
+	/**
+	 * Allows staff to add a showing.
+	 */
 	public void addShow() {
 		System.out.print("Enter Show Name: ");
 		String showName = scanner.nextLine();
@@ -244,17 +294,27 @@ public class ShowUI {
 		String showDescription = scanner.nextLine();
 		System.out.print("Enter Show Price: ");
 		double showPrice = Double.parseDouble(scanner.nextLine());
-		System.out.print("Age Ratings: ");
+		System.out.println("Show Type: ");
+		for (int i = 0; i < ShowType.values().length; i++) {
+			System.out.println((i+1) + ". " + ShowType.values()[i]);
+		}
+
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+		
+		ShowType showType = ShowType.values()[selection-1];
+		
+		System.out.println("Age Ratings: ");
 		for (int i = 0; i < Age.values().length; i++) {
 			System.out.println((i+1) + ". " + Age.values()[i]);
 		}
 
 		System.out.print("Make a selection: ");
-		int selection = Integer.parseInt(scanner.nextLine());
+		selection = Integer.parseInt(scanner.nextLine());
 
 		Age ageRating = Age.values()[selection-1];
 
-		System.out.print("Genres: ");
+		System.out.println("Genres: ");
 		for (int i = 0; i < Genre.values().length; i++) {
 			System.out.println((i+1) + ". " + Genre.values()[i]);
 		}
@@ -266,7 +326,7 @@ public class ShowUI {
 
 		System.out.println("Enter Total Show Times: ");
 		int showCount = Integer.parseInt(scanner.nextLine());
-		System.out.println("Enter times (MM/DD HH:MM):");
+		System.out.println("Enter times (MMM DD HH:MM):");
 		List<String> times = new ArrayList<String>();
 		while (showCount > 0) {
 			times.add(scanner.nextLine());
@@ -275,6 +335,7 @@ public class ShowUI {
 
 		Show newShow = new Show();
 		newShow.setShowInformation("name", showName);
+		newShow.setShowInformation("showType", showType);
 		newShow.setShowInformation("description", showDescription);
 		newShow.setShowInformation("price", showPrice);
 		newShow.setShowInformation("ageRating", ageRating);
@@ -287,6 +348,9 @@ public class ShowUI {
 		DataWriter.writeShows();
 	}
 
+	/**
+	 * Allows staff to remove a showing.
+	 */
 	public void removeShow() {
 		System.out.println(ShowDatabase.getInstance().toString());
 
@@ -307,6 +371,9 @@ public class ShowUI {
 
 	/* End Management Functions */
 
+	/**
+	 * Allows the creation of a user account.
+	 */
 	public void createAccount() {
 		System.out.println("Are you a child or adult? Enter \"child\" or \"adult\"");
 		String person = scanner.nextLine();
@@ -324,6 +391,9 @@ public class ShowUI {
 		DataWriter.writeUsers();
 	}
 
+	/**
+	 * Brings up the search database interface.
+	 */
 	public void search() {
 		System.out.println("**Search System Pro**");
 		System.out.println("1. Search");
@@ -354,7 +424,7 @@ public class ShowUI {
 					if (show == null) {
 						System.out.println("That show is not in the database.");
 					} else {
-						System.out.println(show.toString());
+						System.out.println(show.toString(true));
 					}
 				}
 
@@ -403,12 +473,19 @@ public class ShowUI {
 		}
 	}
 
+	/**
+	 * Helper function to print a list of shows.
+	 * @param shows
+	 */
 	public void printShowList(List<Show> shows) {
 		for (Show show : shows) {
-			System.out.println(show.toString());
+			System.out.println(show.toString(true));
 		}
 	}
 
+	/**
+	 * Allows users of the system to book tickets.
+	 */
 	public void bookTicket() {
 		System.out.println(VenueDatabase.getInstance().toString());
 		System.out.print("Make a selection: ");
@@ -432,13 +509,20 @@ public class ShowUI {
 			seat = scanner.nextLine();
 			char row = seat.charAt(0);
 			int column = Integer.parseInt(""+seat.charAt(1));
-			seats.add(theater.getSeats()[row-'A'][column]); /* TODO: Change this. */
+			seats.add(theater.getSeats()[row-'A'][column]);
 			seatCount--;
 		}
 
 		processOrder(venue, theater, show, seats);
 	}
 
+	/**
+	 * Processes a ticket order.
+	 * @param venue
+	 * @param theater
+	 * @param show
+	 * @param seats
+	 */
 	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
 		System.out.print("Enter Card Holder's Name: ");
 		String cardName = scanner.nextLine();
@@ -480,13 +564,15 @@ public class ShowUI {
 		}
 
 		System.out.println("Seats successfully booked.");
+		theater.printSeats();
 	}
 
-
+	/**
+	 * Allows users to rate a show with a numerical rating and a short description.
+	 */
 	public void rate() {
 		User user = UserManager.getInstance().getCurrentUser();
 		if (user.getBookedShows().size() == 0) return;
-
 
 		for( int i = 0; i < user.getBookedShows().size(); i++) {
 			BookedShow show = user.getBookedShows().get(i);

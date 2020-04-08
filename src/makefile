@@ -12,15 +12,12 @@ CLASSES = \
 				Age.java \
 				BookedShow.java \
 				Child.java \
-				Admin.java \
 				Genre.java \
-				Movie.java \
 				Review.java \
 				Seat.java \
 				Show.java \
 				ShowDatabase.java \
 				ShowUI.java \
-				Staff.java \
 				Theater.java \
 				User.java \
 				UserManager.java \

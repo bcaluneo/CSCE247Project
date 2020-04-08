@@ -23,12 +23,17 @@ public abstract class DataConstants {
 	/* SHOW_DATA */
 
 	protected static final String SHOW_NAME = "name";
+	protected static final String SHOW_TYPE = "type";
 	protected static final String SHOW_DESCRIPTION = "description";
 	protected static final String SHOW_PRICE = "price";
 	protected static final String SHOW_RATING = "ageRating";
 	protected static final String SHOW_GENRE = "genre";
 	protected static final String SHOW_INTHEATERS = "inTheaters";
 	protected static final String SHOW_TIMES = "times";
+	protected static final String SHOW_AUTHORS = "authors";
+	protected static final String SHOW_DESCRIPTIONS = "descriptions";
+	protected static final String SHOW_RATINGS = "ratings";
+	
 
 	/* VENUE_DATA */
 	protected static final String VENUE_NAME = "name";

@@ -1,14 +1,23 @@
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Collections;
-import java.util.Random;
+import java.util.Comparator;
+import java.util.List;
 
+/**
+ * Maintains a list of all the current showings.
+ * @author Team Blue
+ *
+ */
 public class ShowDatabase {
 
 	private static ShowDatabase showDatabase;
+
+	/** A list of all shows. */
 	private List<Show> shows;
 
+	/**
+	 * Initializes the show database.
+	 */
 	private ShowDatabase() {
 		shows = DataLoader.loadShows();
 	}
@@ -21,10 +30,20 @@ public class ShowDatabase {
 		return showDatabase;
 	}
 
+	/**
+	 * Returns a show using an index from the list.
+	 * @param index
+	 * @return show
+	 */
 	public Show getShowByIndex(int index) {
 		return shows.get(index);
 	}
 
+	/**
+	 * Returns a show from the list using the name of the show.
+	 * @param showName
+	 * @return show
+	 */
 	public Show getShowByName(String showName) {
 		for (Show show : shows) {
 			String name = ""+show.getShowInformation("name");
@@ -36,10 +55,18 @@ public class ShowDatabase {
 		return null;
 	}
 
+	/**
+	 * Adds a show to the list.
+	 * @param show
+	 */
 	public void addShow(Show show) {
 		shows.add(show);
 	}
 
+	/**
+	 * Removes a show from the list.
+	 * @param show
+	 */
 	public void removeShow(Show show) {
 		shows.remove(show);
 	}
@@ -59,6 +86,12 @@ public class ShowDatabase {
 		return printout;
 	}
 
+	/**
+	 * A comparator that sorts showings by age in ascending order.
+	 * 
+	 * @author Team Blue
+	 *
+	 */
 	class AgeSort implements Comparator<Show> {
 		public int compare(Show a, Show b) {
 			Age aAge = (Age) a.getShowInformation("ageRating");
@@ -68,6 +101,12 @@ public class ShowDatabase {
 		}
 	}
 
+	/**
+	 * A comparator that sorts showings by genre in ascending order.
+	 * 
+	 * @author Team Blue
+	 *
+	 */
 	class GenreSort implements Comparator<Show> {
 		public int compare(Show a, Show b) {
 			Genre aGenre = (Genre) a.getShowInformation("genre");
@@ -77,6 +116,12 @@ public class ShowDatabase {
 		}
 	}
 
+	/**
+	 * A comparator that sorts showings by name in ascending order.
+	 * 
+	 * @author Team Blue
+	 *
+	 */
 	class NameSort implements Comparator<Show> {
 		public int compare(Show a, Show b) {
 			String aName = "" + a.getShowInformation("name");
@@ -86,6 +131,10 @@ public class ShowDatabase {
 		}
 	}
 
+	/**
+	 * Sorts the list of all shows by genre.
+	 * @return List<Show>
+	 */
 	public List<Show> sortByGenre() {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
@@ -98,6 +147,10 @@ public class ShowDatabase {
 		return result;
 	}
 
+	/**
+	 * Sorts the list of all shows by name.
+	 * @return List<Show>
+	 */
 	public List<Show> sortByName() {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
@@ -110,6 +163,10 @@ public class ShowDatabase {
 		return result;
 	}
 
+	/**
+	 * Sorts the list of all shows by age.
+	 * @return List<Show>
+	 */
 	public List<Show> sortByAgeRating() {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
@@ -122,6 +179,11 @@ public class ShowDatabase {
 		return result;
 	}
 
+	/**
+	 * Searches for shows that contain the name parameter.
+	 * @param name
+	 * @return List<Show>
+	 */
 	public List<Show> searchByName(String name) {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
@@ -135,6 +197,11 @@ public class ShowDatabase {
 		return result;
 	}
 
+	/**
+	 * Searches for a list of shows by genre.
+	 * @param genre
+	 * @return List<Show>
+	 */
 	public List<Show> searchByGenre(Genre genre) {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
@@ -148,6 +215,11 @@ public class ShowDatabase {
 		return result;
 	}
 
+	/**
+	 * Searches for a list of shows by age rating.
+	 * @param age
+	 * @return List<Show>
+	 */
 	public List<Show> searchByAgeRating(Age age) {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {

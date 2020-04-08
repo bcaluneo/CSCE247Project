@@ -1,8 +1,19 @@
+/**
+ * A seat class for use in a theater.
+ * 
+ * @author Team Blue
+ *
+ */
 public class Seat {
 	private char seatRow;
 	private int seatColumn;
 	private boolean isHandicapped, isBooked;
 	
+	/**
+	 * Creates a seat with a row and column.
+	 * @param seatRow
+	 * @param seatColumn
+	 */
 	public Seat(char seatRow, int seatColumn) {
 		this.seatRow = seatRow;
 		this.seatColumn = seatColumn;

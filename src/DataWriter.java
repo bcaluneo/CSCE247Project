@@ -17,7 +17,7 @@ public class DataWriter extends DataConstants {
 			pw.println("[");
 			for (int i = 0; i < users.size(); i++) {
 				JSONObject obj = getUserJSON(users.get(i));
-				pw.println(obj.toString());
+				pw.println(obj.toString() + (i != users.size() - 1 ? "," : ""));
 			}
 			pw.println("]");
 			pw.flush();
@@ -26,7 +26,7 @@ public class DataWriter extends DataConstants {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void writeShows() {
 		ShowDatabase showdb = ShowDatabase.getInstance();
 		List<Show> shows = showdb.getShows();
@@ -36,7 +36,7 @@ public class DataWriter extends DataConstants {
 			pw.println("[");
 			for (int i = 0; i < shows.size(); i++) {
 				JSONObject obj = getShowJSON(shows.get(i));
-				pw.println(obj.toString());
+				pw.println(obj.toString() + (i != shows.size() - 1 ? "," : ""));
 			}
 			pw.println("]");
 			pw.flush();
@@ -45,7 +45,7 @@ public class DataWriter extends DataConstants {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static void writeVenues() {
 		VenueDatabase venuedb = VenueDatabase.getInstance();
 		List<Venue> venues = venuedb.getVenues();
@@ -55,7 +55,7 @@ public class DataWriter extends DataConstants {
 			pw.println("[");
 			for (int i = 0; i < venues.size(); i++) {
 				JSONObject obj = getVenueJSON(venues.get(i));
-				pw.println(obj.toString());
+				pw.println(obj.toString() + (i != venues.size() - 1 ? "," : ""));
 			}
 			pw.println("]");
 			pw.flush();
@@ -77,7 +77,7 @@ public class DataWriter extends DataConstants {
 		if (dob == null) {
 			profileInformation.put(DOB, "-1,-1,-1");
 		} else {
-			profileInformation.put(DOB, dob[0]+","+dob[1]+","+dob[2]);
+			profileInformation.put(DOB, dob[0] + "," + dob[1] + "," + dob[2]);
 		}
 
 		profileInformation.put(ZIPCODE, user.getProfileInformation("zipCode"));
@@ -92,34 +92,51 @@ public class DataWriter extends DataConstants {
 
 		return profileInformation;
 	}
-	
+
 	public static JSONObject getShowJSON(Show show) {
 		JSONObject result = new JSONObject();
-		
+
 		result.put(SHOW_NAME, show.getShowInformation("name"));
+		result.put(SHOW_TYPE, show.getShowInformation("showType").toString());
 		result.put(SHOW_DESCRIPTION, show.getShowInformation("description"));
 		result.put(SHOW_PRICE, show.getShowInformation("price"));
-		result.put(SHOW_RATING, show.getShowInformation("ageRating"));
-		result.put(SHOW_GENRE, show.getShowInformation("genre"));
+		result.put(SHOW_RATING, show.getShowInformation("ageRating").toString());
+		result.put(SHOW_GENRE, show.getShowInformation("genre").toString());
 		result.put(SHOW_INTHEATERS, show.getShowInformation("inTheaters"));
-		
+
 		List<String> times = (ArrayList<String>) show.getShowInformation("times");
 		String timesString = "";
 		for (String string : times) {
 			timesString += string + ",";
 		}
-		
-		result.put(SHOW_NAME, timesString);
+
+		result.put(SHOW_TIMES, timesString);
+
+		List<Review> reviewList = show.getReviews();
+		String authorString = "", descriptionString = "", ratingString = "";
+		for (Review review : reviewList) {
+			authorString += review.getAuthor().getProfileInformation("email") + ",";
+			descriptionString += review.getDescription() + ",";
+			ratingString += review.getRating() + ",";
+		}
+
+		if (authorString.length() > 0) authorString = authorString.substring(0, authorString.length() - 1);
+		if (descriptionString.length() > 0) descriptionString = descriptionString.substring(0, descriptionString.length() - 1);
+		if (ratingString.length() > 0) ratingString = ratingString.substring(0, ratingString.length() - 1);
+
+		result.put(SHOW_AUTHORS, authorString);
+		result.put(SHOW_DESCRIPTIONS, descriptionString);
+		result.put(SHOW_RATINGS, ratingString);
 
 		return result;
 	}
-	
+
 	public static JSONObject getVenueJSON(Venue venue) {
 		JSONObject result = new JSONObject();
-		
+
 		result.put(VENUE_NAME, venue.getName());
 		result.put(VENUE_LOCATION, venue.getLocation());
-		
+
 		return result;
 	}
 }

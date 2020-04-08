@@ -1,5 +1,7 @@
 [
-{"zipCode":29000,"isStaff":false,"isAgeRestricted":false,"discount":true,"isAdmin":false,"isVip":null,"password":"bobtheman","dob":"11,4,1997","name":"Richard","isHandicapped":false,"rewardPoints":10.0,"email":"bob@gmail.com","isAdult":true,"username":"Bob"}
-{"zipCode":-1,"isStaff":false,"isAgeRestricted":false,"discount":false,"isAdmin":false,"isVip":null,"password":"","dob":"-1,-1,-1","name":"","isHandicapped":false,"rewardPoints":-1,"email":"","isAdult":false,"username":"Anonymous"}
-{"zipCode":-1,"isStaff":true,"isAgeRestricted":false,"discount":false,"isAdmin":true,"isVip":null,"password":"1234","dob":"-1,-1,-1","name":"","isHandicapped":false,"rewardPoints":-1,"email":"def@email.com","isAdult":false,"username":"Master Control"}
+{"zipCode":29000,"isStaff":false,"isAgeRestricted":false,"discount":true,"isAdmin":false,"isVip":null,"password":"bobtheman","dob":"11,4,1997","name":"Richard","isHandicapped":false,"rewardPoints":10.0,"email":"bob@gmail.com","isAdult":true,"username":"Bob"},
+{"zipCode":-1,"isStaff":false,"isAgeRestricted":false,"discount":false,"isAdmin":false,"isVip":null,"password":"","dob":"-1,-1,-1","name":"","isHandicapped":false,"rewardPoints":-1.0,"email":"","isAdult":false,"username":"Anonymous"},
+{"zipCode":-1,"isStaff":true,"isAgeRestricted":false,"discount":false,"isAdmin":true,"isVip":null,"password":"1234","dob":"-1,-1,-1","name":"","isHandicapped":false,"rewardPoints":-1.0,"email":"def@email.com","isAdult":false,"username":"Master Control"},
+{"zipCode":-1,"isStaff":false,"isAgeRestricted":false,"discount":false,"isAdmin":false,"isVip":null,"password":"b","dob":"1,15,2000","name":"","isHandicapped":false,"rewardPoints":-1.0,"email":"b@b.com","isAdult":true,"username":"b"},
+{"zipCode":-1,"isStaff":true,"isAgeRestricted":false,"discount":false,"isAdmin":false,"isVip":null,"password":"1234","dob":"1,15,2000","name":"","isHandicapped":false,"rewardPoints":-1,"email":"b@b2.com","isAdult":true,"username":"staff"}
 ]

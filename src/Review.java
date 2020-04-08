@@ -1,8 +1,20 @@
+/**
+ * A review class for a show.
+ * 
+ * @author Team Blue
+ */
 public class Review {
+	
 	private User author;
-	String description;
-	int rating;
+	private String description;
+	private int rating;
 
+	/**
+	 * Creates a review instance.
+	 * @param author
+	 * @param description
+	 * @param rating
+	 */
 	public Review(User author, String description, int rating) {
 		this.author = author;
 		this.description = description;
@@ -22,8 +34,6 @@ public class Review {
 	}
 
 	public String toString() {
-		return "Author: "+this.author.getProfileInformation("username")
-			+"\nDescription: "+this.description
-			+"\nRating: "+this.rating+" Stars";
+		return "Author: " + this.author.getProfileInformation("username") + "\nDescription: " + this.description + "\nRating: " + this.rating + " Stars";
 	}
 }

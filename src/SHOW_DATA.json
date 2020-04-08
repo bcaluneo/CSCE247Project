@@ -1,1 +1,6 @@
-[{"name":"Test Show","description":"Test Show Description","price":"1.25","ageRating":"R","genre":"FANTASY","inTheaters":"true","times":"Apr 8 12:30,Apr 8 2:45", "authors":"","descriptions":"","ratings":"0"}]
+[
+{"times":"Apr 8 12:30,Apr 8 2:45,","price":1.25,"ratings":"","name":"Test Show","genre":"FANTASY","description":"Test Show Description","ageRating":"R","type":"MOVIE","descriptions":"","inTheaters":true,"authors":""},
+{"times":"Apr 9 2:30,Apr 12 11:45,","price":21.25,"ratings":"","name":"Frozen 2","genre":"FANTASY","description":"Frozen 2: Electric Boogaloo","ageRating":"R","type":"MOVIE","descriptions":"","inTheaters":true,"authors":""},
+{"times":"Apr 9 2:30,Apr 12 11:45,","price":5.75,"ratings":"4","name":"The Jungle Book","genre":"FANTASY","description":"A bear kidnaps a little kid and doesn't want to give him back.'","ageRating":"PG13","type":"MOVIE","descriptions":"Fun experience","inTheaters":true,"authors":"b@b.com"},
+{"times":"Apr 1 12:30,","price":1.2,"ratings":"","name":"Frozen dfasdf","genre":"FANTASY","description":"asdf","ageRating":"NC17","type":"PLAY","descriptions":"","inTheaters":true,"authors":""}
+]

@@ -5,8 +5,8 @@ import java.io.File;
 import java.util.ArrayList;
 
 /**
- * this class keeps track of all the booked shows or movies in a list by a user
- * @author Brendan Caluneo
+ * Maintains which shows the user has booked tickets to.
+ * @author Team Blue
  */
 public class BookedShow {
 
@@ -16,7 +16,8 @@ public class BookedShow {
 	private Theater theater;
 
 	/**
-	 * constructor
+	 * Creates a BookedShow
+	 * 
 	 * @param venue
 	 * @param theater
 	 * @param show
@@ -54,15 +55,15 @@ public class BookedShow {
 			pw.println("**********************");
 			pw.println("Venue: " + venue.getName());
 			pw.println("Theater: " + theater.getTheaterNumber());
-			pw.println("Total Price: " + (Double.parseDouble(""+show.getShowInformation("price"))*seats.size()));
+			pw.println("Total Price: " + (Double.parseDouble("" + show.getShowInformation("price")) * seats.size()));
 			pw.println("Times: ");
-			for (String s : (ArrayList<String>) show.getShowInformation("times")){
+			for (String s : (ArrayList<String>) show.getShowInformation("times")) {
 				pw.println("\t" + s);
 			}
 
 			pw.println("Seats: ");
 			for (Seat s : seats) {
-				pw.println("" + s.getSeatRow() + "" + s.getSeatColumn());
+				pw.println("\t" + s.getSeatRow() + "" + s.getSeatColumn());
 			}
 			pw.println("**********************");
 			pw.flush();

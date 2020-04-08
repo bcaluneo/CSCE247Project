@@ -57,13 +57,11 @@ public class DataLoader extends DataConstants {
 				users.add(user);
 			}
 
-			return users;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return users;
 	}
 
 	public static List<Show> loadShows() {
@@ -77,6 +75,7 @@ public class DataLoader extends DataConstants {
 				JSONObject userJSON = (JSONObject) usersJSON.get(i);
 
 				String name = (String) userJSON.get(SHOW_NAME);
+				ShowType showType = ShowType.valueOf(""+userJSON.get(SHOW_TYPE));
 				String description = (String) userJSON.get(SHOW_DESCRIPTION);
 				double price = Double.parseDouble("" + userJSON.get(SHOW_PRICE));
 				Age ageRating = Age.valueOf("" + userJSON.get(SHOW_RATING));
@@ -88,8 +87,13 @@ public class DataLoader extends DataConstants {
 					times.add(string);
 				}
 
+				String[] authors = ("" + userJSON.get(SHOW_AUTHORS)).split(",");
+				String[] descriptions = ("" + userJSON.get(SHOW_DESCRIPTIONS)).split(",");
+				String[] ratings = ("" + userJSON.get(SHOW_RATINGS)).split(",");
+
 				Show show = new Show();
 				show.setShowInformation("name", name);
+				show.setShowInformation("showType", showType);
 				show.setShowInformation("description", description);
 				show.setShowInformation("price", price);
 				show.setShowInformation("ageRating", ageRating);
@@ -97,23 +101,28 @@ public class DataLoader extends DataConstants {
 				show.setShowInformation("inTheaters", inTheaters);
 				show.setShowInformation("times", times);
 
+				if (authors.length >= 1 && authors[0].length() > 0) {
+					for (int j = 0; j < authors.length; j++) {
+						Review review = new Review(UserManager.getInstance().getUserByEmail(authors[j]), descriptions[j], Integer.parseInt(ratings[j]));
+						show.addReview(review);
+					}
+				}
+
 				shows.add(show);
 			}
-
-			return shows;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return shows;
 	}
 
 	public static List<Venue> loadVenues() {
 		List<Venue> venues = new ArrayList<Venue>();
 
 		try {
-			FileReader reader = new FileReader(SHOW_DATA);
+			FileReader reader = new FileReader(VENUE_DATA);
 			JSONArray usersJSON = (JSONArray) new JSONParser().parse(reader);
 
 			for (int i = 0; i < usersJSON.size(); i++) {
@@ -126,12 +135,10 @@ public class DataLoader extends DataConstants {
 				venues.add(venue);
 			}
 
-			return venues;
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return null;
+		return venues;
 	}
 }
