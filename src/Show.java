@@ -68,20 +68,31 @@ public class Show {
 		reviews.remove(review);
 	}
 
-	public String toString() {
+	public String toString(boolean printReviews) {
 		String printout = "";
-		printout += "****" + "\n";
+		printout += "\n" + "****************" + "\n";
 		printout += "Name: " + getShowInformation("name") + "\n";
+		printout += "Description: " + getShowInformation("description") + "\n";
 		printout += "Age Rating: " + getShowInformation("ageRating") + "\n";
 		printout += "Genre: " + getShowInformation("genre") + "\n";
-		printout += "Average Rating: " + getAverageRating() + "\n";
-		printout += "Reviews: " + "\n";
-		for (int i = 0; i < reviews.size(); i++) {
-			Review review = reviews.get(i);
-			printout += i + ":\n";
-			printout += review.toString();
+		printout += "Times: " + "\n";
+
+		List<String> times = (ArrayList<String>) getShowInformation("times");
+		if (times != null) {
+			for (String time : times) {
+				printout += time + "\n";
+			}
 		}
-		printout += "\n" + "****" + "\n";
+
+		printout += "Average Rating: " + getAverageRating() + "\n";
+		if (printReviews) {
+			printout += "Reviews: " + "\n";
+			for (int i = 0; i < reviews.size(); i++) {
+				Review review = reviews.get(i);
+				printout += i + ":\n";
+				printout += review.toString();
+			}
+		}
 
 		return printout;
 	}
