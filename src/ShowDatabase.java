@@ -7,10 +7,10 @@ import java.util.Random;
 public class ShowDatabase {
 
 	private static ShowDatabase showDatabase;
-	private Show[] shows;
+	private List<Show> shows;
 
 	private ShowDatabase() {
-		shows = new Show[100];
+		shows = new ArrayList<Show>();
 
 		Random random = new Random();
 
@@ -19,7 +19,7 @@ public class ShowDatabase {
 			Show show = new Show();
 			show.setShowInformation("name", "Show " + i);
 			show.setShowInformation("genre", Genre.values()[random.nextInt(Genre.values().length)]);
-			shows[i] = show;
+			shows.add(show);
 		}
 	}
 
@@ -32,7 +32,7 @@ public class ShowDatabase {
 	}
 
 	public Show getShowByIndex(int index) {
-		return shows[index];
+		return shows.get(index);
 	}
 
 	public Show getShowByName(String showName) {
@@ -55,13 +55,16 @@ public class ShowDatabase {
 	public void removeShow(Show show) {
 	}
 
+	public List<Show> getShows() {
+		return this.shows;
+	}
+
 	public String toString() {
 		String printout = "";
 		printout += "===========================\n";
 		printout += "Showings: \n";
-		for (int i = 0; i < shows.length; i++) {
-			if(shows[i] != null)
-				printout += i + ": " + shows[i].getShowInformation("name")+ "\n";
+		for (int i = 0; i < shows.size(); i++) {
+				printout += i + ": " + shows.get(i).getShowInformation("name")+ "\n";
 		}
 
 		return printout;

@@ -38,7 +38,7 @@ public class Show {
 	}
 
 	public double getAverageRating() {
-		if (reviews.size() == 0) return -1;
+		if (reviews.size() == 0) return 0;
 
 		int sum = 0;
 		for (Review review : reviews) {
@@ -54,6 +54,10 @@ public class Show {
 			if (username.equals(author)) return review;
 		}
 		return null;
+	}
+
+	public Review getReviewByIndex(int index) {
+		return reviews.get(index);
 	}
 
 	public void addReview(Review review) {
@@ -72,7 +76,9 @@ public class Show {
 		printout += "Genre: " + getShowInformation("genre") + "\n";
 		printout += "Average Rating: " + getAverageRating() + "\n";
 		printout += "Reviews: " + "\n";
-		for (Review review : reviews) {
+		for (int i = 0; i < reviews.size(); i++) {
+			Review review = reviews.get(i);
+			printout += i + ":\n";
 			printout += review.toString();
 		}
 		printout += "\n" + "****" + "\n";

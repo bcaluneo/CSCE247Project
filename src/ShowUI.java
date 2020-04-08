@@ -9,6 +9,9 @@ public class ShowUI {
 	private String[] options = {"Login", "Create Account", "Search/Sort", "Book",
 															"Rate", "Management", "Quit"};
 
+	private String[] mgtOptions = {"Add Venue", "Remove Venue", "Edit Venue",
+																 "Remove Review", "Modify Account", "Exit"};
+
 	public ShowUI() {
 		scanner = new Scanner(System.in);
 	}
@@ -18,6 +21,17 @@ public class ShowUI {
 		System.out.println("Options:");
 		for (int i = 0; i < options.length; i++) {
 				String printout = options[i];
+				System.out.println(i + ": " + printout);
+		}
+
+		System.out.print("Make a selection: ");
+	}
+
+	public void printMgtOptions() {
+		System.out.println("===========================");
+		System.out.println("Mangement Mode:");
+		for (int i = 0; i < mgtOptions.length; i++) {
+				String printout = mgtOptions[i];
 				System.out.println(i + ": " + printout);
 		}
 
@@ -48,7 +62,7 @@ public class ShowUI {
 					rate();
 					break;
 				case 5: /* Management */
-					showManagementOptions();
+					mangementMode();
 					break;
 				case 6: /* Quit */
 					System.out.println("Quitting system...");
@@ -58,13 +72,155 @@ public class ShowUI {
 		}
 	}
 
-	public void showManagementOptions() {
+	public void mangementMode() {
 		User user = UserManager.getInstance().getCurrentUser();
-		if (!(user instanceof Admin) || !(user instanceof Staff)) {
+		if (!user.isAdmin() || !user.isStaff()) {
 			System.out.println("You do not have access to these functions.");
 			return;
 		}
+
+		boolean quit = false;
+		while (!quit) {
+			printMgtOptions();
+			int selection = Integer.parseInt(scanner.nextLine());
+			switch (selection) {
+				case 0: /* Add Venue */
+					addVenue();
+					break;
+				case 1: /* Remove Venue */
+					removeVenue();
+					break;
+				case 2: /* Edit Venue */
+					editVenue();
+					break;
+				case 3: /* Remove Review */
+					removeReview();
+					break;
+				case 4: /* Modify Account */
+					modifyAccount();
+					break;
+				case 5: /* Exit */
+					quit = true;
+					continue;
+			}
+		}
 	}
+
+	/* Management Functions */
+
+	public void editVenue() {
+		System.out.println(VenueDatabase.getInstance().toString());
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
+		System.out.println(venue.toString());
+
+		System.out.println("Options: ");
+		System.out.println("1. Change Name");
+		System.out.println("2. Change Location");
+		System.out.println("3. Quit");
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+
+		switch (selection) {
+			case 1:
+				System.out.print("Enter New Name: ");
+				String newName = scanner.nextLine();
+				venue.setName(newName);
+				break;
+			case 2:
+				System.out.print("Enter New Location: ");
+				String newLocation = scanner.nextLine();
+				venue.setLocation(newLocation);
+				break;
+			case 3:
+				return;
+		}
+	}
+
+	public void addVenue() {
+		System.out.print("Enter Venue Name: ");
+		String venueName = scanner.nextLine();
+		System.out.print("Enter Venue Location: ");
+		String venueLocation = scanner.nextLine();
+
+		Venue venue = new Venue(venueName, venueLocation);
+		VenueDatabase.getInstance().addVenue(venue);
+	}
+
+	public void removeVenue() {
+		System.out.println(VenueDatabase.getInstance().toString());
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		System.out.println("Are you sure you want to delete this? (y/n)");
+		char choice = scanner.nextLine().charAt(0);
+		if (choice == 'n') {
+			return;
+		} else if (choice == 'y') {
+			Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
+			VenueDatabase.getInstance().removeVenue(venue);
+		}
+	}
+
+	public void removeReview() {
+		if (!UserManager.getInstance().getCurrentUser().isAdmin()) {
+			System.out.println("You do not have access to this function.");
+		}
+
+		System.out.println(ShowDatabase.getInstance().toString());
+
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
+		System.out.println(show.toString());
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+
+		Review review = show.getReviewByIndex(selection);
+		show.deleteReview(review);
+
+		System.out.println("Review successfully deleted.");
+	}
+
+	public void modifyAccount() {
+		if (!UserManager.getInstance().getCurrentUser().isAdmin()) {
+			System.out.println("You do not have access to this function.");
+		}
+
+		System.out.println(UserManager.getInstance().toString());
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		User user = UserManager.getInstance().getUserByIndex(selection);
+		if (user.isStaff() || user.isAdmin()) {
+			System.out.println("User is already staff.");
+			return;
+		}
+
+		System.out.println("Options:");
+		System.out.println("1. Elevate To Staff");
+		System.out.println("2. Elevate To Admin");
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+
+		if (selection == 1) {
+			UserManager.getInstance().setAsStaff(user);
+			System.out.println("User " + user.getProfileInformation("username") +
+												 " successfully elevated to staff.");
+		} else if (selection == 2) {
+			UserManager.getInstance().setAsAdmin(user);
+			System.out.println("User " + user.getProfileInformation("username") +
+												 " successfully elevated to admin.");
+		}
+	}
+
+	/* End Management Functions */
 
 	public void createAccount() {
 		System.out.println("Are you a child or adult? Enter \"child\" or \"adult\"");
@@ -205,7 +361,7 @@ public class ShowUI {
 		String cardCode = scanner.nextLine();
 		if (!UserManager.getInstance().getCurrentUser().isDefaultUser()) {
 				System.out.println("Would you like to save this payment information? (y/n)");
-				char choice = scanner.next().charAt(0);
+				char choice = scanner.nextLine().charAt(0);
 				if (choice == 'y') {
 					System.out.println("Information saved.");
 					UserManager.getInstance().getCurrentUser().setPaymentInformation("card-name", cardName);

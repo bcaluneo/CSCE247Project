@@ -31,7 +31,8 @@ public class Venue {
 
 	public String toString() {
 		String printout = "";
-		printout += name+"\n";
+		printout += "Name: " + name + "\n";
+		printout += "Location: " + location + "\n";
 		for (int i = 0; i < theaters.length; i++) {
 			if(theaters[i]!=null)
 				printout += "Theater: " + i + "\n";
@@ -42,6 +43,19 @@ public class Venue {
 	public String getName() {
 		return this.name;
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getLocation() {
+		return this.location;
+	}
+
+	public void setLocation(String location) {
+		this.location = location;
+	}
+
 	public Theater getTheater(int i ) {
 		return theaters[i];
 	}

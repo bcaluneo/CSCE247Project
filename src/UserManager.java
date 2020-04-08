@@ -12,7 +12,16 @@ public class UserManager {
 	private UserManager() {
 		users = new ArrayList<User>();
 		currentUser = new User();
-		currentUser.setProfileInformation("username", "Anonymous");
+
+		User adminAccount = new User();
+		adminAccount.setProfileInformation("username", "Master Control");
+		adminAccount.setProfileInformation("email", "def@email.com");
+		adminAccount.setProfileInformation("password", "1234");
+		adminAccount.setProfileInformation("isStaff", true);
+		adminAccount.setProfileInformation("isAdmin", true);
+
+		users.add(currentUser);
+		users.add(adminAccount);
 	}
 
 	public static UserManager getInstance() {
@@ -58,7 +67,7 @@ public class UserManager {
 		user.setProfileInformation("password", string);
 		return user;
 	}
-	
+
 	public void createAdultAccount() {
 		Adult adult = new Adult();
 		int[] dob = makeDob();
@@ -77,7 +86,7 @@ public class UserManager {
 		System.out.println("Logging in as "+adult.getProfileInformation("username"));
 		this.loggedIn=true;
 	}
-	
+
 	public void createChildAccount(User parent) {
 		if(parent instanceof Child) {
 			System.out.println("You cannot use a child account as the parent.");
@@ -97,30 +106,31 @@ public class UserManager {
 			child.setProfileInformation("discount", true);
 			currentUser = child;
 			users.add(child);
-			
+
 			System.out.println("Logging in as "+child.getProfileInformation("username"));
 			this.loggedIn=true;
 		}
 	}
-	
+
 	public void setAsStaff(User user) {
 		if(emailExists(String.valueOf(user.getProfileInformation("email")))) {
 			user.setProfileInformation("isStaff", true);
-		}else {
+		} else {
 			System.out.println("Account doesn't exist");
 		}
 	}
-	
+
 	public void setAsAdmin(User user) {
 		if(emailExists(String.valueOf(user.getProfileInformation("email")))) {
 			user.setProfileInformation("isAdmin", true);
-		}else {
+		} else {
 			System.out.println("Account doesn't exist");
 		}
 	}
 
 	public boolean emailExists(String email) {
 		for(User user : users) {
+			System.out.println(user.getProfileInformation("email"));
 			if(user.getProfileInformation("email").equals(email)) {
 				return true;
 			}
@@ -136,7 +146,7 @@ public class UserManager {
 		}
 		return false;
 	}
-	
+
 	public int[] makeDob() {
 		int month=0,day=0,year=0;
 		boolean Continue = true;
@@ -207,8 +217,8 @@ public class UserManager {
 			this.loggedIn=true;
 		}
 	}
-	
-	
+
+
 	public User loginUser() {
 		User user = new User();
 		boolean Continue = true;
@@ -258,6 +268,22 @@ public class UserManager {
 			}
 		}
 		return null;
+	}
+
+	public User getUserByIndex(int index) {
+		return users.get(index);
+	}
+
+	public String toString() {
+		String printout = "";
+    printout += "===========================\n";
+    printout += "User Accounts: \n";
+    for (int i = 0; i < users.size(); i++) {
+    	if(users.get(i)!=null)
+    		printout += i + ": " + users.get(i).getProfileInformation("username") +"\n";
+		}
+
+    return printout;
 	}
 
 }

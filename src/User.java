@@ -15,20 +15,20 @@ public class User {
 		this.paymentInformation = new HashMap<String, Object>(MAX_PAYMENT_INFO);
 		this.bookedShows = new ArrayList<BookedShow>();
 
-		profileInformation.put("username", null); /* String */
-		profileInformation.put("name", null); /* String */
-		profileInformation.put("email", null); /* String */
-		profileInformation.put("password", null); /* String */
+		profileInformation.put("username", "Anonymous"); /* String */
+		profileInformation.put("name", ""); /* String */
+		profileInformation.put("email", ""); /* String */
+		profileInformation.put("password", ""); /* String */
 		profileInformation.put("dob", null); /* int[3] {month, day, year} */
-		profileInformation.put("zipCode", null); /* int */
-		profileInformation.put("discount", null); /* boolean */
-		profileInformation.put("isAdult", null); /* boolean */
-		profileInformation.put("isStaff", null); /* boolean */
-		profileInformation.put("isAdmin", null); /* boolean */
-		profileInformation.put("isVIP", null); /* boolean */
-		profileInformation.put("isHandicapped", null); /* boolean */
-		profileInformation.put("rewardPoints", null); /* double */
-		profileInformation.put("isAgeRestricted", null); /* boolean */
+		profileInformation.put("zipCode", -1); /* int */
+		profileInformation.put("discount", false); /* boolean */
+		profileInformation.put("isAdult", false); /* boolean */
+		profileInformation.put("isStaff", false); /* boolean */
+		profileInformation.put("isAdmin", false); /* boolean */
+		profileInformation.put("isVIP", false); /* boolean */
+		profileInformation.put("isHandicapped", false); /* boolean */
+		profileInformation.put("rewardPoints", -1); /* double */
+		profileInformation.put("isAgeRestricted", false); /* boolean */
 
 		paymentInformation.put("card-number", null);
 		paymentInformation.put("card-date", null);
@@ -66,6 +66,14 @@ public class User {
 
 	public boolean isDefaultUser() {
 		return getProfileInformation("username").equals("Anonymous"); /* Put this into a variable. */
+	}
+
+	public boolean isStaff() {
+		return (boolean) getProfileInformation("isStaff") == true;
+	}
+
+	public boolean isAdmin() {
+		return (boolean) getProfileInformation("isAdmin") == true;
 	}
 
 	public void bookShow(Venue venue, Theater theater, Show show, List<Seat> seats) {
