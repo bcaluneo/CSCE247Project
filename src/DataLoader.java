@@ -12,19 +12,19 @@ import org.json.CDL;
 
 
 public class DataLoader extends DataConstants {
-	
+
 	public static ArrayList<User> loadUser() {
-		ArrayList<User> users = new ArrayList<User>();
-		
+		List<User> users = new ArrayList<User>();
+
 		try {
 			FileReader reader = new FileReader(USER_DATA);
 			CDL parser = new CDL();
 			JSONArray usersJSON = CDL.rowToJSONArray(new JSONTokener(reader));
-				
-			
+
+
 			for(int i=0; i < usersJSON.size(); i++) {
 				JSONObject userJSON = (JSONObject)usersJSON.get(i);
-				
+
 				String username = (String)userJSON.get(USERNAME);
 				String name = (String)userJSON.get(NAME);
 				String email = (String)userJSON.get(EMAIL);
@@ -39,19 +39,29 @@ public class DataLoader extends DataConstants {
 				boolean isHandicapped = (boolean)userJSON.get(IS_HANDICAPPED);
 				int rewardPoints = (int)userJSON.get(REWARDPOINTS);
 				boolean isAgeRestricted = (boolean)userJSON.get(AGE_RESTRICTED);
-				
-				
-				users.add(new User(username, name, email, password, dob, zipCode, 
-						discount, isAdult, isStaff, isAdmin, isVip, isHandicapped,
-						isAgeRestricted));
+
+				User user = new User();
+				user.setProfileInformation("username", username);
+				user.setProfileInformation("name", name);
+				user.setProfileInformation("email", email);
+				user.setProfileInformation("password", password);
+				user.setProfileInformation("dob", dob);
+				user.setProfileInformation("zipCode", zipCode);
+				user.setProfileInformation("discount", discount);
+				user.setProfileInformation("isAdult", isAdult);
+				user.setProfileInformation("isStaff", isStaff);
+				user.setProfileInformation("isAdmin", isAdmin);
+				user.setProfileInformation("isVIP", isVIP);
+				user.setProfileInformation("isHandicapped", isHandicapped);
+				user.setProfileInformation("isAgeRestricted", isAgeRestricted);
 			}
-			
+
 			return users;
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		return null;
 	}
 }

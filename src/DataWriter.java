@@ -9,30 +9,30 @@ import org.json.JSONString;
 import org.json.JSONWriter;
 
 public class DataWriter extends DataConstants {
-	
-	
+
+
 	public static void writeUser() {
 		UserManager user = UserManager.getInstance();
-		ArrayList<User> users = UserManager.getCurrentUser();
+		List<User> users = user.getUsers();
 		JSONArray jsonUsers = new JSONArray();
-		
+
 		for(int i=0; i< users.size(); i++) {
 			jsonUsers.add(getUserJSON(users.get(i)));
 		}
-		
+
         try (FileWriter file = new FileWriter(USER_DATA)) {
- 
+
             file.write(jsonUsers.toString());
             file.flush();
- 
+
         } catch (IOException e) {
             e.printStackTrace();
         }
 	}
-	
-	public static JSONObject getUserJSON(UserManager user) {
+
+	public static JSONObject getUserJSON(User user) {
 		JSONObject profileInformation = new JSONObject();
-	
+
 		profileInformation.put(USERNAME, user.getProfileInformation(username));
 		profileInformation.put(NAME, user.getProfileInformation(name));
 		profileInformation.put(EMAIL, user.getProfileInformation(email));
@@ -47,8 +47,8 @@ public class DataWriter extends DataConstants {
 		profileInformation.put(IS_HANDICAPPED,user.getProfileInformation(isHandicapped));
 		profileInformation.put(REWARDPOINTS,user.getProfileInformation(rewardPoints));
 		profileInformation.put(AGE_RESTRICTED,user.getProfileInformation(isAgeRestricted));
-		
-        
+
+
         return profileInformation;
 	}
 }
