@@ -63,7 +63,7 @@ public class ShowDatabase {
 		printout += "===========================\n";
 		printout += "Showings: \n";
 		for (int i = 0; i < shows.size(); i++) {
-				printout += i + ": " + shows.get(i).getShowInformation("name")+ "\n";
+				printout += i + ": " + shows.get(i).toString(false);
 		}
 
 		return printout;

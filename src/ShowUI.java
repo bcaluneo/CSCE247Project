@@ -272,8 +272,8 @@ public class ShowUI {
 		newShow.setShowInformation("inTheaters", true);
 		newShow.setShowInformation("times", times);
 
-		ShowDatabase.getInstance().addShow(show);
-		System.out.println("Show successfully added.")
+		ShowDatabase.getInstance().addShow(newShow);
+		System.out.println("Show successfully added.");
 	}
 
 	public void removeShow() {
@@ -396,12 +396,15 @@ public class ShowUI {
 
 	public void bookTicket() {
 		System.out.println(VenueDatabase.getInstance().toString());
+		System.out.print("Make a selection: ");
 		int selection = Integer.parseInt(scanner.nextLine());
 		Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
 		System.out.println(ShowDatabase.getInstance().toString());
+		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
 		Show show = ShowDatabase.getInstance().getShowByIndex(selection);
 		System.out.println(venue.toString());
+		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
 		Theater theater = venue.getTheater(selection);
 		List<Seat> seats = new ArrayList<Seat>();

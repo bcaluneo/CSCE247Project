@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.File;
 
 /**
- * 
+ *
  * @author Brendan Caluneo
  * this class keeps track of all the booked shows or movies in a list by a user
  */
@@ -16,7 +16,7 @@ public class BookedShow {
 	private Theater theater;
 
 	/**
-	 * constructor 
+	 * constructor
 	 * @param venue
 	 * @param theater
 	 * @param show
@@ -58,6 +58,7 @@ public class BookedShow {
 			pw.println("**********************");
 			pw.println("Venue: " + venue.getName());
 			pw.println("Theater: " + theater.getTheaterNumber());
+			pw.println("Total Price: " + Double.parseDouble(show.getShowInformation("price"))*seats.size());
 			pw.println("Seats: ");
 			for (Seat s : seats) {
 				pw.println("" + s.getSeatRow() + "" + s.getSeatColumn());
