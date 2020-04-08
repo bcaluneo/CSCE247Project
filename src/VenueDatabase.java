@@ -6,10 +6,7 @@ public class VenueDatabase {
 	private List<Venue> venues;
 
 	private VenueDatabase() {
-		venues = new ArrayList<Venue>();
-		for (int i = 0; i < 5; i++) {
-			venues.add(new Venue("Venue " + i, "Location " + i));
-		}
+		venues = DataLoader.loadVenues();
 	}
 
 	public static VenueDatabase getInstance() {
@@ -53,5 +50,9 @@ public class VenueDatabase {
 		}
 
 		return printout;
+	}
+	
+	public List<Venue> getVenues() {
+		return this.venues;
 	}
 }

@@ -145,6 +145,8 @@ public class ShowUI {
 			case 3:
 				return;
 		}
+		
+		DataWriter.writeVenues();
 	}
 
 	public void addVenue() {
@@ -155,6 +157,8 @@ public class ShowUI {
 
 		Venue venue = new Venue(venueName, venueLocation);
 		VenueDatabase.getInstance().addVenue(venue);
+
+		DataWriter.writeVenues();
 	}
 
 	public void removeVenue() {
@@ -170,6 +174,8 @@ public class ShowUI {
 			Venue venue = VenueDatabase.getInstance().getVenueByIndex(selection);
 			VenueDatabase.getInstance().removeVenue(venue);
 		}
+
+		DataWriter.writeVenues();
 	}
 
 	public void removeReview() {
@@ -192,6 +198,8 @@ public class ShowUI {
 		show.deleteReview(review);
 
 		System.out.println("Review successfully deleted.");
+		
+		DataWriter.writeShows();
 	}
 
 	public void modifyAccount() {
@@ -225,6 +233,8 @@ public class ShowUI {
 			System.out.println("User " + user.getProfileInformation("username") +
 												 " successfully elevated to admin.");
 		}
+		
+		DataWriter.writeUsers();
 	}
 
 	public void addShow() {
@@ -274,6 +284,7 @@ public class ShowUI {
 
 		ShowDatabase.getInstance().addShow(newShow);
 		System.out.println("Show successfully added.");
+		DataWriter.writeShows();
 	}
 
 	public void removeShow() {
@@ -290,6 +301,8 @@ public class ShowUI {
 			Show show = ShowDatabase.getInstance().getShowByIndex(selection);
 			ShowDatabase.getInstance().removeShow(show);
 		}
+
+		DataWriter.writeShows();
 	}
 
 	/* End Management Functions */
@@ -489,5 +502,7 @@ public class ShowUI {
 
 		Review review = new Review(user, comment, selection);
 		toReview.getShow().addReview(review);
+		
+		DataWriter.writeShows();
 	}
 }

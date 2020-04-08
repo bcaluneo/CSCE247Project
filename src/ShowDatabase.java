@@ -10,17 +10,7 @@ public class ShowDatabase {
 	private List<Show> shows;
 
 	private ShowDatabase() {
-		shows = new ArrayList<Show>();
-
-		Random random = new Random();
-
-		/* TODO: Test code. */
-		for (int i = 0; i < 15; i++) {
-			Show show = new Show();
-			show.setShowInformation("name", "Show " + i);
-			show.setShowInformation("genre", Genre.values()[random.nextInt(Genre.values().length)]);
-			shows.add(show);
-		}
+		shows = DataLoader.loadShows();
 	}
 
 	public static ShowDatabase getInstance() {

@@ -1,10 +1,9 @@
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 public class DataWriter extends DataConstants {
@@ -18,6 +17,44 @@ public class DataWriter extends DataConstants {
 			pw.println("[");
 			for (int i = 0; i < users.size(); i++) {
 				JSONObject obj = getUserJSON(users.get(i));
+				pw.println(obj.toString());
+			}
+			pw.println("]");
+			pw.flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeShows() {
+		ShowDatabase showdb = ShowDatabase.getInstance();
+		List<Show> shows = showdb.getShows();
+
+		try {
+			PrintWriter pw = new PrintWriter(new File(SHOW_DATA));
+			pw.println("[");
+			for (int i = 0; i < shows.size(); i++) {
+				JSONObject obj = getShowJSON(shows.get(i));
+				pw.println(obj.toString());
+			}
+			pw.println("]");
+			pw.flush();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void writeVenues() {
+		VenueDatabase venuedb = VenueDatabase.getInstance();
+		List<Venue> venues = venuedb.getVenues();
+
+		try {
+			PrintWriter pw = new PrintWriter(new File(SHOW_DATA));
+			pw.println("[");
+			for (int i = 0; i < venues.size(); i++) {
+				JSONObject obj = getVenueJSON(venues.get(i));
 				pw.println(obj.toString());
 			}
 			pw.println("]");
@@ -54,5 +91,35 @@ public class DataWriter extends DataConstants {
 		profileInformation.put(AGE_RESTRICTED, user.getProfileInformation("isAgeRestricted"));
 
 		return profileInformation;
+	}
+	
+	public static JSONObject getShowJSON(Show show) {
+		JSONObject result = new JSONObject();
+		
+		result.put(SHOW_NAME, show.getShowInformation("name"));
+		result.put(SHOW_DESCRIPTION, show.getShowInformation("description"));
+		result.put(SHOW_PRICE, show.getShowInformation("price"));
+		result.put(SHOW_RATING, show.getShowInformation("ageRating"));
+		result.put(SHOW_GENRE, show.getShowInformation("genre"));
+		result.put(SHOW_INTHEATERS, show.getShowInformation("inTheaters"));
+		
+		List<String> times = (ArrayList<String>) show.getShowInformation("times");
+		String timesString = "";
+		for (String string : times) {
+			timesString += string + ",";
+		}
+		
+		result.put(SHOW_NAME, timesString);
+
+		return result;
+	}
+	
+	public static JSONObject getVenueJSON(Venue venue) {
+		JSONObject result = new JSONObject();
+		
+		result.put(VENUE_NAME, venue.getName());
+		result.put(VENUE_LOCATION, venue.getLocation());
+		
+		return result;
 	}
 }

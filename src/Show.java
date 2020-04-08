@@ -18,7 +18,7 @@ public class Show {
 		showInformation.put("ageRating", null); /* Enum (Age) */
 		showInformation.put("genre", null); /* Enum (Genre) */
 		showInformation.put("inTheaters", null); /* boolean */
-		showInformation.put("times", null); /* String[] */
+		showInformation.put("times", null); /* List<String> */
 
 		reviews = new ArrayList<Review>();
 	}
