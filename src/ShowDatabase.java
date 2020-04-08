@@ -46,13 +46,12 @@ public class ShowDatabase {
 		return null;
 	}
 
-	public void editShowInformation(Show show, String key, Object value) {
-	}
-
 	public void addShow(Show show) {
+		shows.add(show);
 	}
 
 	public void removeShow(Show show) {
+		shows.remove(show);
 	}
 
 	public List<Show> getShows() {

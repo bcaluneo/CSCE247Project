@@ -10,7 +10,8 @@ public class ShowUI {
 															"Rate", "Management", "Quit"};
 
 	private String[] mgtOptions = {"Add Venue", "Remove Venue", "Edit Venue",
-																 "Remove Review", "Modify Account", "Exit"};
+																 "Remove Review", "Modify Account",
+																 "Add Show", "Remove Show", "Exit"};
 
 	public ShowUI() {
 		scanner = new Scanner(System.in);
@@ -99,7 +100,13 @@ public class ShowUI {
 				case 4: /* Modify Account */
 					modifyAccount();
 					break;
-				case 5: /* Exit */
+				case 5: /* Add Show */
+					addShow();
+					break;
+				case 6: /* Remove Show */
+					removeShow();
+					break;
+				case 7: /* Exit */
 					quit = true;
 					continue;
 			}
@@ -217,6 +224,71 @@ public class ShowUI {
 			UserManager.getInstance().setAsAdmin(user);
 			System.out.println("User " + user.getProfileInformation("username") +
 												 " successfully elevated to admin.");
+		}
+	}
+
+	public void addShow() {
+		System.out.print("Enter Show Name: ");
+		String showName = scanner.nextLine();
+		System.out.print("Enter Show Description: ");
+		String showDescription = scanner.nextLine();
+		System.out.print("Enter Show Price: ");
+		double showPrice = Double.parseDouble(scanner.nextLine());
+		System.out.print("Age Ratings: ");
+		for (int i = 0; i < Age.values().length; i++) {
+			System.out.println((i+1) + ". " + Age.values()[i]);
+		}
+
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		Age ageRating = Age.values()[selection-1];
+
+		System.out.print("Genres: ");
+		for (int i = 0; i < Genre.values().length; i++) {
+			System.out.println((i+1) + ". " + Genre.values()[i]);
+		}
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+
+		Genre genre = Genre.values()[selection-1];
+
+		System.out.println("Enter Total Show Times: ");
+		int showCount = Integer.parseInt(scanner.nextLine());
+		System.out.println("Enter times (MM/DD HH:MM):");
+		List<String> times = new ArrayList<String>();
+		while (showCount > 0) {
+			times.add(scanner.nextLine());
+			showCount--;
+		}
+
+		Show newShow = new Show();
+		newShow.setShowInformation("name", showName);
+		newShow.setShowInformation("description", showDescription);
+		newShow.setShowInformation("price", showPrice);
+		newShow.setShowInformation("ageRating", ageRating);
+		newShow.setShowInformation("genre", genre);
+		newShow.setShowInformation("inTheaters", true);
+		newShow.setShowInformation("times", times);
+
+		ShowDatabase.getInstance().addShow(show);
+		System.out.println("Show successfully added.")
+	}
+
+	public void removeShow() {
+		System.out.println(ShowDatabase.getInstance().toString());
+
+		System.out.print("Make a selection: ");
+		int selection = Integer.parseInt(scanner.nextLine());
+
+		System.out.println("Are you sure you want to delete this? (y/n)");
+		char choice = scanner.nextLine().charAt(0);
+		if (choice == 'n') {
+			return;
+		} else if (choice == 'y') {
+			Show show = ShowDatabase.getInstance().getShowByIndex(selection);
+			ShowDatabase.getInstance().removeShow(show);
 		}
 	}
 
