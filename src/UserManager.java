@@ -5,7 +5,6 @@ public class UserManager {
 
 	private static UserManager userManager;
 	private ArrayList<User> users;
-	private boolean loggedIn;
 	private User currentUser;
 	Scanner scanner = new Scanner(System.in);
 
@@ -80,7 +79,6 @@ public class UserManager {
 		currentUser = user;
 		users.add(user);
 		System.out.println("Logging in as "+user.getProfileInformation("username"));
-		this.loggedIn=true;
 	}
 
 	public void createChildAccount(User parent) {
@@ -104,7 +102,6 @@ public class UserManager {
 			users.add(child);
 
 			System.out.println("Logging in as "+child.getProfileInformation("username"));
-			this.loggedIn=true;
 		}
 	}
 
@@ -126,7 +123,6 @@ public class UserManager {
 
 	public boolean emailExists(String email) {
 		for(User user : users) {
-			System.out.println(user.getProfileInformation("email"));
 			if(user.getProfileInformation("email").equals(email)) {
 				return true;
 			}
@@ -210,7 +206,6 @@ public class UserManager {
 		this.currentUser=loginUser();
 		if(this.currentUser!=null) {
 			System.out.println("Logging in as "+currentUser.getProfileInformation("username"));
-			this.loggedIn=true;
 		}
 	}
 
@@ -221,13 +216,13 @@ public class UserManager {
 		String string;
 		while(Continue){
 			System.out.println("Enter your email");
-			string = scanner.nextLine();
+			string = scanner.next();
 			if(emailExists(string)) {
 				user = getUserByEmail(string);
 				Continue = false;
 			} else {
 				System.out.println("Email is invalid, go back to menu? Enter \"yes\" or \"no\"");
-				string = scanner.nextLine();
+				string = scanner.next();
 				if(string.equals("yes")) {
 					return null;
 				}
@@ -241,7 +236,7 @@ public class UserManager {
 				Continue = false;
 			} else {
 				System.out.println("Password is invalid, go back to menu? Enter \"yes\" or \"no\"");
-				string = scanner.nextLine();
+				string = scanner.next();
 				if(string.equals("yes")) {
 					return null;
 				}
@@ -254,7 +249,6 @@ public class UserManager {
 	public void logoutUser() {
 		System.out.println("Logging out");
 		this.currentUser=null;
-		this.loggedIn=false;
 	}
 
 	public User getUserByEmail(String email) {
