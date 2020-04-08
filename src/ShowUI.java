@@ -307,6 +307,8 @@ public class ShowUI {
 		} else if(person.equals("adult")) {
 			UserManager.getInstance().createAdultAccount();
 		}
+		
+		DataWriter.writeUsers();
 	}
 
 	public void search() {

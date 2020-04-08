@@ -1,16 +1,16 @@
+import java.util.List;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 public class UserManager {
 
 	private static UserManager userManager;
-	private ArrayList<User> users;
+	private List<User> users;
 	private boolean loggedIn;
 	private User currentUser;
 	Scanner scanner = new Scanner(System.in);
 
 	private UserManager() {
-		users = new ArrayList<User>();
+		users = DataLoader.loadUsers();
 		currentUser = new User();
 
 		User adminAccount = new User();
@@ -126,7 +126,6 @@ public class UserManager {
 
 	public boolean emailExists(String email) {
 		for(User user : users) {
-			System.out.println(user.getProfileInformation("email"));
 			if(user.getProfileInformation("email").equals(email)) {
 				return true;
 			}
@@ -280,6 +279,10 @@ public class UserManager {
 		}
 
     return printout;
+	}
+	
+	public List<User> getUsers() {
+		return this.users;
 	}
 
 }
