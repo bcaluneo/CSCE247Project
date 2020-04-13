@@ -1,5 +1,11 @@
+package managers;
+
 import java.util.List;
 import java.util.Scanner;
+
+import data.DataLoader;
+import user.Child;
+import user.User;
 
 /**
  * Maintains a list of all the program users.
@@ -128,6 +134,7 @@ public class UserManager {
 
 	/**
 	 * Toggles a user's account access to staff functions.
+	 * 
 	 * @param user
 	 */
 	public void toggleStaffAccount(User user) {
@@ -140,6 +147,7 @@ public class UserManager {
 
 	/**
 	 * Toggles a user's account access to staff and admin functions.
+	 * 
 	 * @param user
 	 */
 	public void toggleAdminAccount(User user) {
@@ -152,6 +160,7 @@ public class UserManager {
 
 	/**
 	 * Determines whether the given email address is registered to a user.
+	 * 
 	 * @param email
 	 * @return boolean
 	 */
@@ -166,6 +175,7 @@ public class UserManager {
 
 	/**
 	 * Determines whether the given username is registered to a user.
+	 * 
 	 * @param username
 	 * @return boolean
 	 */
@@ -177,9 +187,10 @@ public class UserManager {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Returns a user instance if the email is found within the list.
+	 * 
 	 * @param email
 	 * @return user
 	 */
@@ -194,6 +205,7 @@ public class UserManager {
 
 	/**
 	 * Returns a user using an index from the list.
+	 * 
 	 * @param index
 	 * @return user
 	 */
@@ -203,6 +215,7 @@ public class UserManager {
 
 	/**
 	 * Creates the date of birth array used for user accounts.
+	 * 
 	 * @return int[3]
 	 */
 	public int[] makeDob() {
@@ -258,16 +271,16 @@ public class UserManager {
 
 	/**
 	 * Deletes a user from the list using the given email.
+	 * 
 	 * @param email
 	 */
 	public void deleteUser(String email) {
 		if (emailExists(email)) {
-			int account = 0;
-			for (User user : users) {
+			for (int i = 0; i < users.size(); i++) {
+				User user = users.get(i);
 				if (user.getProfileInformation("email").equals(email)) {
-					users.remove(account);
+					users.remove(user);
 				}
-				account++;
 			}
 		}
 	}
@@ -284,6 +297,7 @@ public class UserManager {
 
 	/**
 	 * Gets an account for the user to login to.
+	 * 
 	 * @return user
 	 */
 	public User loginUser() {

@@ -1,3 +1,5 @@
+package data;
+
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -5,6 +7,15 @@ import java.util.List;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import managers.UserManager;
+import show.Age;
+import show.Genre;
+import show.Review;
+import show.Show;
+import show.ShowType;
+import user.User;
+import venue.Venue;
 
 public class DataLoader extends DataConstants {
 
@@ -78,7 +89,7 @@ public class DataLoader extends DataConstants {
 				ShowType showType = ShowType.valueOf(""+userJSON.get(SHOW_TYPE));
 				String description = (String) userJSON.get(SHOW_DESCRIPTION);
 				double price = Double.parseDouble("" + userJSON.get(SHOW_PRICE));
-				Age ageRating = Age.valueOf("" + userJSON.get(SHOW_RATING));
+				Age age = Age.valueOf("" + userJSON.get(SHOW_RATING));
 				Genre genre = Genre.valueOf("" + userJSON.get(SHOW_GENRE));
 				boolean inTheaters = Boolean.parseBoolean("" + userJSON.get(SHOW_INTHEATERS));
 				String[] timesSplit = ("" + userJSON.get(SHOW_TIMES)).split(",");
@@ -96,7 +107,7 @@ public class DataLoader extends DataConstants {
 				show.setShowInformation("showType", showType);
 				show.setShowInformation("description", description);
 				show.setShowInformation("price", price);
-				show.setShowInformation("ageRating", ageRating);
+				show.setShowInformation("age", age);
 				show.setShowInformation("genre", genre);
 				show.setShowInformation("inTheaters", inTheaters);
 				show.setShowInformation("times", times);

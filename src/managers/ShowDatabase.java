@@ -1,7 +1,14 @@
+package managers;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+import data.DataLoader;
+import show.Age;
+import show.Genre;
+import show.Show;
 
 /**
  * Maintains a list of all the current showings.
@@ -11,7 +18,7 @@ import java.util.List;
 public class ShowDatabase {
 
 	private static ShowDatabase showDatabase;
-
+	
 	/** A list of all shows. */
 	private List<Show> shows;
 
@@ -94,8 +101,8 @@ public class ShowDatabase {
 	 */
 	class AgeSort implements Comparator<Show> {
 		public int compare(Show a, Show b) {
-			Age aAge = (Age) a.getShowInformation("ageRating");
-			Age bAge = (Age) b.getShowInformation("ageRating");
+			Age aAge = (Age) a.getShowInformation("age");
+			Age bAge = (Age) b.getShowInformation("age");
 			if (aAge.ordinal() > bAge.ordinal()) return 1;
 			return -1;
 		}
@@ -167,7 +174,7 @@ public class ShowDatabase {
 	 * Sorts the list of all shows by age.
 	 * @return List<Show>
 	 */
-	public List<Show> sortByAgeRating() {
+	public List<Show> sortByAge() {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
 			if (show == null) continue;
@@ -224,7 +231,7 @@ public class ShowDatabase {
 		List<Show> result = new ArrayList<Show>();
 		for (Show show : shows) {
 			if (show == null) continue;
-			Age showAge = (Age) show.getShowInformation("ageRating");
+			Age showAge = (Age) show.getShowInformation("age");
 			if (showAge == age) {
 				result.add(show);
 			}

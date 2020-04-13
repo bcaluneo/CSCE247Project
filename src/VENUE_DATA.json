@@ -1,1 +1,4 @@
-[{"name":"Regal","location":"1234 Rainbow Drive, Some City, SC 29123"}]
+[
+  {"name":"Regal","location":"1234 Rainbow Drive, Some City, SC 29123"},
+  {"name":"PlaysRUs","location":"4123 Some Street, Other City, SC 29301"}
+]

@@ -1,6 +1,21 @@
-import java.util.Scanner;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+import data.DataWriter;
+import managers.ShowDatabase;
+import managers.UserManager;
+import managers.VenueDatabase;
+import show.Age;
+import show.BookedShow;
+import show.Genre;
+import show.Review;
+import show.Show;
+import show.ShowType;
+import user.User;
+import venue.Seat;
+import venue.Theater;
+import venue.Venue;
 
 /**
  * The interface for the system.
@@ -170,7 +185,7 @@ public class ShowUI {
 			case 3:
 				return;
 		}
-		
+
 		DataWriter.writeVenues();
 	}
 
@@ -232,7 +247,7 @@ public class ShowUI {
 		show.deleteReview(review);
 
 		System.out.println("Review successfully deleted.");
-		
+
 		DataWriter.writeShows();
 	}
 
@@ -280,7 +295,7 @@ public class ShowUI {
 						 " successfully demoted from admin.");
 			}
 		}
-		
+
 		DataWriter.writeUsers();
 	}
 
@@ -301,9 +316,9 @@ public class ShowUI {
 
 		System.out.print("Make a selection: ");
 		int selection = Integer.parseInt(scanner.nextLine());
-		
+
 		ShowType showType = ShowType.values()[selection-1];
-		
+
 		System.out.println("Age Ratings: ");
 		for (int i = 0; i < Age.values().length; i++) {
 			System.out.println((i+1) + ". " + Age.values()[i]);
@@ -312,7 +327,7 @@ public class ShowUI {
 		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
 
-		Age ageRating = Age.values()[selection-1];
+		Age age = Age.values()[selection-1];
 
 		System.out.println("Genres: ");
 		for (int i = 0; i < Genre.values().length; i++) {
@@ -338,7 +353,7 @@ public class ShowUI {
 		newShow.setShowInformation("showType", showType);
 		newShow.setShowInformation("description", showDescription);
 		newShow.setShowInformation("price", showPrice);
-		newShow.setShowInformation("ageRating", ageRating);
+		newShow.setShowInformation("age", age);
 		newShow.setShowInformation("genre", genre);
 		newShow.setShowInformation("inTheaters", true);
 		newShow.setShowInformation("times", times);
@@ -387,7 +402,7 @@ public class ShowUI {
 		} else if(person.equals("adult")) {
 			UserManager.getInstance().createAdultAccount();
 		}
-		
+
 		DataWriter.writeUsers();
 	}
 
@@ -450,7 +465,7 @@ public class ShowUI {
 				break;
 			case 3:
 				if (!search) {
-					System.out.println(ShowDatabase.getInstance().sortByAgeRating());
+					System.out.println(ShowDatabase.getInstance().sortByAge());
 				} else {
 					System.out.println("Options: ");
 					for (int i = 0; i < Age.values().length; i++) {
@@ -460,9 +475,9 @@ public class ShowUI {
 					System.out.print("Make a selection: ");
 					selection = Integer.parseInt(scanner.nextLine());
 
-					Age ageRating = Age.values()[selection-1];
-					if (ageRating != null) {
-						printShowList(ShowDatabase.getInstance().searchByAgeRating(ageRating));
+					Age age = Age.values()[selection-1];
+					if (age != null) {
+						printShowList(ShowDatabase.getInstance().searchByAgeRating(age));
 					}
 				}
 
@@ -479,7 +494,7 @@ public class ShowUI {
 	 */
 	public void printShowList(List<Show> shows) {
 		for (Show show : shows) {
-			System.out.println(show.toString(true));
+			System.out.println(show.toString(false));
 		}
 	}
 
@@ -499,6 +514,17 @@ public class ShowUI {
 		System.out.print("Make a selection: ");
 		selection = Integer.parseInt(scanner.nextLine());
 		Theater theater = venue.getTheater(selection);
+
+		List<String> times = (ArrayList<String>) show.getShowInformation("times");
+		System.out.println("Available times: ");
+		for (int i = 0; i < times.size(); i++) {
+			System.out.println("\t" + i + ": " + times.get(i));
+		}
+
+		System.out.print("Make a selection: ");
+		selection = Integer.parseInt(scanner.nextLine());
+		String time = times.get(selection);
+
 		List<Seat> seats = new ArrayList<Seat>();
 		System.out.println("How many seats would you like to book?");
 		int seatCount = Integer.parseInt(scanner.nextLine());
@@ -513,7 +539,7 @@ public class ShowUI {
 			seatCount--;
 		}
 
-		processOrder(venue, theater, show, seats);
+		processOrder(venue, theater, show, seats, time);
 	}
 
 	/**
@@ -523,7 +549,7 @@ public class ShowUI {
 	 * @param show
 	 * @param seats
 	 */
-	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats) {
+	public void processOrder(Venue venue, Theater theater, Show show, List<Seat> seats, String time) {
 		System.out.print("Enter Card Holder's Name: ");
 		String cardName = scanner.nextLine();
 		System.out.print("Enter Card Number (No Dash): ");
@@ -560,7 +586,7 @@ public class ShowUI {
 				venue.bookSeat(theater, s.getSeatRow(), s.getSeatColumn());
 			}
 
-			UserManager.getInstance().getCurrentUser().bookShow(venue, theater, show, seats);
+			UserManager.getInstance().getCurrentUser().bookShow(venue, theater, show, seats, time);
 		}
 
 		System.out.println("Seats successfully booked.");
@@ -588,7 +614,7 @@ public class ShowUI {
 
 		Review review = new Review(user, comment, selection);
 		toReview.getShow().addReview(review);
-		
+
 		DataWriter.writeShows();
 	}
 }

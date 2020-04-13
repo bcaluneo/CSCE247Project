@@ -1,5 +1,10 @@
+package venue;
+
+import show.Review;
+
 /**
  * A venue that contains a list of theaters.
+ * 
  * @author Team Blue
  *
  */
@@ -14,6 +19,7 @@ public class Venue {
 
 	/**
 	 * Creates a theater instance with the given name and location.
+	 * 
 	 * @param name
 	 * @param location
 	 */
@@ -29,12 +35,13 @@ public class Venue {
 
 	/**
 	 * Books a seat within a theater.
+	 * 
 	 * @param theater
 	 * @param row
 	 * @param column
 	 */
 	public void bookSeat(Theater theater, char row, int column) {
-		theater.getSeats()[row-'A'][column].setBooked(true);
+		theater.getSeats()[row - 'A'][column].setBooked(true);
 	}
 
 	/**
@@ -45,6 +52,7 @@ public class Venue {
 
 	/**
 	 * Adds a theater to the venue's list of theaters.
+	 * 
 	 * @param theater
 	 */
 	public void addTheater(Theater[] theater) {
@@ -52,6 +60,7 @@ public class Venue {
 
 	/**
 	 * Removes a theater from the venue's list of theaters.
+	 * 
 	 * @param theater
 	 */
 	public void deleteTheater(Theater[] theater) {
@@ -62,8 +71,7 @@ public class Venue {
 		printout += "Name: " + name + "\n";
 		printout += "Location: " + location + "\n";
 		for (int i = 0; i < theaters.length; i++) {
-			if(theaters[i]!=null)
-				printout += "Theater: " + i + "\n";
+			if (theaters[i] != null) printout += "Theater: " + i + "\n";
 		}
 		return printout;
 	}
@@ -84,7 +92,7 @@ public class Venue {
 		this.location = location;
 	}
 
-	public Theater getTheater(int i ) {
+	public Theater getTheater(int i) {
 		return theaters[i];
 	}
 }

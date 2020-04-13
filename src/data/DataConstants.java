@@ -1,3 +1,5 @@
+package data;
+
 public abstract class DataConstants {
 	protected static final String USER_DATA = "src/USER_DATA.json";
 	protected static final String SHOW_DATA = "src/SHOW_DATA.json";
@@ -26,7 +28,7 @@ public abstract class DataConstants {
 	protected static final String SHOW_TYPE = "type";
 	protected static final String SHOW_DESCRIPTION = "description";
 	protected static final String SHOW_PRICE = "price";
-	protected static final String SHOW_RATING = "ageRating";
+	protected static final String SHOW_RATING = "age";
 	protected static final String SHOW_GENRE = "genre";
 	protected static final String SHOW_INTHEATERS = "inTheaters";
 	protected static final String SHOW_TIMES = "times";

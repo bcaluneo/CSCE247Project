@@ -1,3 +1,5 @@
+package venue;
+
 /**
  * A theater within a venue.
  * 

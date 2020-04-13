@@ -1,3 +1,7 @@
+package show;
+
+import user.User;
+
 /**
  * A review class for a show.
  * 

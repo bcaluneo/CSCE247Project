@@ -1,6 +1,14 @@
+package user;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+
+import show.BookedShow;
+import show.Show;
+import venue.Seat;
+import venue.Theater;
+import venue.Venue;
 
 /**
  * A basic user class.
@@ -11,16 +19,16 @@ public class User {
 
 	/** The maximum number of attributes the user can have. */
 	private static final int MAX_ATTRIBUTES = 13;
-	
+
 	/** The maximum number of payment information. */
 	private static final int MAX_PAYMENT_INFO = 4;
 
 	/** Stores the payment and profile information. */
 	private HashMap<String, Object> profileInformation, paymentInformation;
-	
+
 	/** A list of booked shows. */
 	private List<BookedShow> bookedShows;
-	
+
 	/** A list of children (if parent account). */
 	private List<User> children;
 
@@ -135,8 +143,8 @@ public class User {
 	 * @param show
 	 * @param seats
 	 */
-	public void bookShow(Venue venue, Theater theater, Show show, List<Seat> seats) {
-		BookedShow bookedShow = new BookedShow(venue, theater, show, seats);
+	public void bookShow(Venue venue, Theater theater, Show show, List<Seat> seats, String time) {
+		BookedShow bookedShow = new BookedShow(venue, theater, show, seats, time);
 		bookedShows.add(bookedShow);
 		bookedShow.printTicket();
 	}

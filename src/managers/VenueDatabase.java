@@ -1,4 +1,9 @@
+package managers;
+
 import java.util.List;
+
+import data.DataLoader;
+import venue.Venue;
 
 /**
  * Maintains a list of all the venue's in the program.

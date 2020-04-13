@@ -1,3 +1,5 @@
+package data;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -5,6 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONObject;
+
+import managers.ShowDatabase;
+import managers.UserManager;
+import managers.VenueDatabase;
+import show.Review;
+import show.Show;
+import user.User;
+import venue.Venue;
 
 public class DataWriter extends DataConstants {
 
@@ -100,7 +110,7 @@ public class DataWriter extends DataConstants {
 		result.put(SHOW_TYPE, show.getShowInformation("showType").toString());
 		result.put(SHOW_DESCRIPTION, show.getShowInformation("description"));
 		result.put(SHOW_PRICE, show.getShowInformation("price"));
-		result.put(SHOW_RATING, show.getShowInformation("ageRating").toString());
+		result.put(SHOW_RATING, show.getShowInformation("age").toString());
 		result.put(SHOW_GENRE, show.getShowInformation("genre").toString());
 		result.put(SHOW_INTHEATERS, show.getShowInformation("inTheaters"));
 

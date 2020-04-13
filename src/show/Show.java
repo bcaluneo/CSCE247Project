@@ -1,6 +1,8 @@
+package show;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 
 /**
  * A show that can be booked.
@@ -29,7 +31,7 @@ public class Show {
 		showInformation.put("showType", null); /* Enum (ShowType) */
 		showInformation.put("description", null); /* String */
 		showInformation.put("price", null); /* double */
-		showInformation.put("ageRating", null); /* Enum (Age) */
+		showInformation.put("age", null); /* Enum (Age) */
 		showInformation.put("genre", null); /* Enum (Genre) */
 		showInformation.put("inTheaters", null); /* boolean */
 		showInformation.put("times", null); /* List<String> */
@@ -65,7 +67,7 @@ public class Show {
 	 * Returns the average review rating.
 	 * @return double
 	 */
-	public double getAverageRating() {
+	public double getAverage() {
 		if (reviews.size() == 0) return 0;
 
 		int sum = 0;
@@ -120,7 +122,7 @@ public class Show {
 		printout += "Name: " + getShowInformation("name") + "\n";
 		printout += "Type: " + getShowInformation("showType") + "\n";
 		printout += "Description: " + getShowInformation("description") + "\n";
-		printout += "Age Rating: " + getShowInformation("ageRating") + "\n";
+		printout += "Age Rating: " + getShowInformation("age") + "\n";
 		printout += "Genre: " + getShowInformation("genre") + "\n";
 		printout += "Times: " + "\n";
 
@@ -131,7 +133,7 @@ public class Show {
 			}
 		}
 
-		printout += "Average Rating: " + getAverageRating() + "\n";
+		printout += "Average Rating: " + getAverage() + "\n";
 		if (printReviews) {
 			printout += "Reviews: " + "\n";
 			for (int i = 0; i < reviews.size(); i++) {

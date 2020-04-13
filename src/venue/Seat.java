@@ -1,3 +1,5 @@
+package venue;
+
 /**
  * A seat class for use in a theater.
  * 

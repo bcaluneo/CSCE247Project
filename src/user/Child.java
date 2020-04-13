@@ -1,3 +1,4 @@
+package user;
 
 /**
  * class for user as child in the system

@@ -1,3 +1,5 @@
+package show;
+
 /**
  * Differentiates between show types.
  * @author Team Blue
